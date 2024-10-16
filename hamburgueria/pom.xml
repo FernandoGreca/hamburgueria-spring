@@ -8,10 +8,10 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.fernandogreca</groupId>
-	<artifactId>login</artifactId>
+	<groupId>com.fernandoproject</groupId>
+	<artifactId>hamburgueria</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>login</name>
+	<name>hamburgueria</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>

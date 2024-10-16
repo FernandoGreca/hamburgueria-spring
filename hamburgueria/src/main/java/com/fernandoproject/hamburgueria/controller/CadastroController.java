@@ -1,20 +1,17 @@
-package com.fernandogreca.login.controller;
+package com.fernandoproject.hamburgueria.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fernandogreca.login.exceptions.EmailExistException;
-import com.fernandogreca.login.model.Usuario;
-import com.fernandogreca.login.service.ServiceUsuario;
+import com.fernandoproject.hamburgueria.exceptions.EmailExistException;
+import com.fernandoproject.hamburgueria.model.Usuario;
+import com.fernandoproject.hamburgueria.service.ServiceUsuario;
 
 import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.PostMapping;
-
-
 
 @Controller
 public class CadastroController {

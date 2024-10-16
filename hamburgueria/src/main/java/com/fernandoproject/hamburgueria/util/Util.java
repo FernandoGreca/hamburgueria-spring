@@ -1,4 +1,4 @@
-package com.fernandogreca.login.util;
+package com.fernandoproject.hamburgueria.util;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

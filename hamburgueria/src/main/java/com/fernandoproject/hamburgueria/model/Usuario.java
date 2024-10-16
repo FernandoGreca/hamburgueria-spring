@@ -1,4 +1,4 @@
-package com.fernandogreca.login.model;
+package com.fernandoproject.hamburgueria.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

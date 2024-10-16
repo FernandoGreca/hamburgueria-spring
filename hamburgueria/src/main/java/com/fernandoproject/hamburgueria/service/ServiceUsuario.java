@@ -1,16 +1,16 @@
-package com.fernandogreca.login.service;
+package com.fernandoproject.hamburgueria.service;
 
 import java.security.NoSuchAlgorithmException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fernandogreca.login.dao.UsuarioDao;
-import com.fernandogreca.login.exceptions.CriptoExistException;
-import com.fernandogreca.login.exceptions.EmailExistException;
-import com.fernandogreca.login.exceptions.ServiceExc;
-import com.fernandogreca.login.model.Usuario;
-import com.fernandogreca.login.util.Util;
+import com.fernandoproject.hamburgueria.dao.UsuarioDao;
+import com.fernandoproject.hamburgueria.exceptions.CriptoExistException;
+import com.fernandoproject.hamburgueria.exceptions.EmailExistException;
+import com.fernandoproject.hamburgueria.exceptions.ServiceExc;
+import com.fernandoproject.hamburgueria.model.Usuario;
+import com.fernandoproject.hamburgueria.util.Util;
 
 @Service
 public class ServiceUsuario {

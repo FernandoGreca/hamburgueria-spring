@@ -1,4 +1,4 @@
-package com.fernandogreca.login.exceptions;
+package com.fernandoproject.hamburgueria.exceptions;
 
 public class ServiceExc extends Exception{
     private static final long serialVersionUID = 1L;

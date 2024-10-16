@@ -1,4 +1,4 @@
-package com.fernandogreca.login.controller;
+package com.fernandoproject.hamburgueria.controller;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -6,18 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fernandogreca.login.exceptions.ServiceExc;
-import com.fernandogreca.login.model.Usuario;
-import com.fernandogreca.login.service.ServiceUsuario;
-import com.fernandogreca.login.util.Util;
+import com.fernandoproject.hamburgueria.exceptions.ServiceExc;
+import com.fernandoproject.hamburgueria.model.Usuario;
+import com.fernandoproject.hamburgueria.service.ServiceUsuario;
+import com.fernandoproject.hamburgueria.util.Util;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.PostMapping;
-
 
 @Controller
 public class LoginController {

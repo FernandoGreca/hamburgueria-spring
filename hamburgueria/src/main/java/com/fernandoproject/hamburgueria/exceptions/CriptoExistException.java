@@ -1,4 +1,4 @@
-package com.fernandogreca.login.exceptions;
+package com.fernandoproject.hamburgueria.exceptions;
 
 public class CriptoExistException extends Exception{
     

@@ -1,9 +1,9 @@
-package com.fernandogreca.login.dao;
+package com.fernandoproject.hamburgueria.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.fernandogreca.login.model.Usuario;
+import com.fernandoproject.hamburgueria.model.Usuario;
 
 public interface UsuarioDao extends JpaRepository<Usuario, Long>{
     
