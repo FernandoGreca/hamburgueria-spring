@@ -13,25 +13,34 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+main {
+    padding-top: 100px;
+}
+
 /* Estilos nav */
 nav {
     background-color: #0D0D0D;
-}
-.nav-link {
-    color: #f2f2f283;
-    transition: color 0.3s ease;
-}
-.nav-link:hover {
-    color: white;
-}
-.navbar-toggler {
-    background-color: var(--laranja-claro); 
-    border: none;
+
+    .nav-link {
+        color: #f2f2f283;
+        transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+        color: white;
+    }
+    .navbar-toggler {
+        background-color: var(--laranja-claro); 
+        border: none;
+    }
+    .navbar-brand img {
+        width: 10vw;
+    }
 }
 
-.navbar-brand img {
-    width: 10vw;
-}
+
+
+
+
 
 
 /* Inicio */
@@ -73,7 +82,6 @@ nav {
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
     transition: box-shadow 0.3s ease, transform 0.3s ease, backgroun-color 0.3s ease;
 }
-
 .btn-custom:hover {
     background-color: var(--laranja-forte);
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.4);
@@ -81,19 +89,59 @@ nav {
     color: white;
 }
 
+/* Sobre */
+.bg-laranja {
+    background-color: var(--laranja-forte);
 
+    .txt-sobre {
+        padding: 100px 50px;
+
+        h1 {
+            max-width: 550px;
+            color: #0D0D0D;
+            border-bottom: 3px solid var(--branco);
+            margin-bottom: 25px;
+        }
+    }
+}
+
+/* Footer */
+footer {
+    background-color: var(--preto);
+
+    .nav-link {
+        color: #f2f2f283;
+        transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: white;
+    }
+}
 
 /* Media Query */
 @media screen and (max-width: 880px) {
-    .navbar-brand img {
-        width: 30vw;
+    nav {
+        .navbar-brand img {
+            width: 30vw;
+        }
     }
     .topo-site {
         flex-direction: column;
     }
 }
 @media screen and (max-width: 600px) {
-    .navbar-brand img {
-        width: 40vw;
+    main {
+        padding-top: 80px;
+    }
+    .bg-laranja {
+        .txt-sobre {
+            padding: 40px 0;
+        }
+    }
+    nav {
+        .navbar-brand img {
+            width: 40vw;
+        }
     }
 }

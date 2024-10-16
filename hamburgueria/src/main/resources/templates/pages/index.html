@@ -14,7 +14,9 @@
     <!-- LINK FAVICON -->
     <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
     <!-- LINK FONTS -->
-    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Pacifico&family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Righteous&family=Pacifico&family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;500;700&display=swap"
+        rel="stylesheet">
 
     <title>Hamburgueria | Index</title>
 </head>
@@ -22,7 +24,7 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" th:href="@{/}">
                     <img src="/img/logo.png" alt="Logo da Hamburgueria">
@@ -34,16 +36,18 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Início</a>
+                            <a class="nav-link" href="#topoSite">Início</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Sobre</a>
+                            <a class="nav-link" href="#sobre">Sobre</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <div id="topoSite"></div>
     </header>
+    
 
     <main>
         <div class="container">
@@ -65,13 +69,64 @@
                     <div class="hamburger-img d-flex align-items-center justify-content-center">
                         <img src="/img/hamburguer-topo.webp" alt="">
                     </div>
-                </div>
+                </div>   
             </div>
+            <div id="sobre"></div>
         </div>
         <div class="bg-laranja">
             
+            <div class="container">
+                <div class="txt-sobre">
+                    <h1>Sobre a Burger - 24 Horas</h1>
+                    <p>
+                        Na <strong>Burger - 24 Horas</strong>, acreditamos que um hambúrguer é muito mais do que apenas
+                        uma refeição: é uma experiência que deve ser desfrutada a qualquer momento do dia. Fundada por
+                        apaixonados por gastronomia, nossa hamburgueria tem como objetivo trazer um pedacinho do sabor
+                        autêntico e caseiro para você, onde quer que esteja.
+                    </p>
+                    <p>
+                        Nosso cardápio é uma celebração de sabores, oferecendo uma ampla variedade de hambúrgueres que
+                        atendem a todos os paladares. Desde os clássicos cheeseburgers até opções gourmet com
+                        ingredientes especiais, cada lanche é preparado na hora, com carnes frescas, pães artesanais e
+                        acompanhamentos selecionados para proporcionar uma explosão de sabores em cada mordida.
+                    </p>
+                    <p>
+                        Além dos nossos hambúrgueres irresistíveis, temos também uma seleção de opções vegetarianas e
+                        veganas, garantindo que todos possam se deliciar com nossos pratos. E para acompanhar sua
+                        refeição, oferecemos uma variedade de molhos exclusivos, batatas fritas crocantes e bebidas
+                        refrescantes.
+                    </p>
+                    <p>
+                        A conveniência é a nossa prioridade. Estamos abertos 24 horas por dia, 7 dias por semana, para
+                        garantir que você tenha acesso ao melhor sabor a qualquer hora. Seja após uma noite de festa,
+                        durante uma maratona de estudos ou simplesmente quando a fome apertar, nossa equipe está sempre
+                        pronta para atendê-lo com agilidade e simpatia.
+                    </p>
+                    <p>
+                        Na <strong>Burger - 24 Horas</strong>, valorizamos não apenas a qualidade dos nossos produtos,
+                        mas também a experiência dos nossos clientes. Por isso, estamos constantemente buscando
+                        inovações e feedbacks para aprimorar nossos serviços e cardápio. Venha nos visitar e descubra o
+                        verdadeiro sabor de um hambúrguer preparado com amor e dedicação. Estamos ansiosos para
+                        servi-lo!
+                    </p>
+                </div>
+            </div>
         </div>
     </main>
+
+    <footer class="py-3">
+        <div class="container">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="#topoSite">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#sobre">Sobre</a>
+                </li>
+            </ul>
+            <p class="text-center nav-link">© 2024 Burger - 24 Horas, Inc</p>
+        </div>
+    </footer>
 
     <!-- JS BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
