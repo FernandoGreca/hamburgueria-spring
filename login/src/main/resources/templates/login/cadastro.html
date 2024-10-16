@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- ICONS BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- LINK CSS -->
+    <link rel="stylesheet" href="/css/login.css">
+    <title>System | Login</title>
+</head>
+<body>
+
+    <div class="login">
+        <form action="salvarUsuario" method="post" th:object="${usuario}">
+
+            <div class="mb-3">
+                <h1>Cadastro</h1>
+                <h5>Preencha o formulário para realizar cadastro</h5>
+                <hr>
+
+                <div class="alert alert-danger" role="alert" th:if= "${msgErroCadastro}">
+                    <strong th:text="${msgErroCadastro}"></strong>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email: </label>
+                <input type="text" class="form-control" data-th-field="*{email}" placeholder="Ex: teste@gmail.com">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Username: </label>
+                <input type="text" class="form-control" data-th-field="*{user}" placeholder="Ex: JoãoMelo">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Senha: </label>
+                <input type="password" class="form-control" data-th-field="*{senha}" placeholder="Senha">
+            </div>
+            <div class="mb-3 botao-login">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+            <div class="mb-3 botao-login">
+                <a th:href= "@{/}" class="btn btn-outline-danger">Voltar</a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- JS BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

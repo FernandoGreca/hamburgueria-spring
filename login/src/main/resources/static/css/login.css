@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #202022;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #878787;
+    min-width: 30%;
+}
+
+.registrar {
+    display: flex;
+    justify-content: center;
+}
+
+.botao-login {
+    display: flex;
+    justify-content: center;
+}
+.botao-login button {
+    width: 60%;
+}
+
+@media screen and (max-width: 600px) {
+    .login {
+        min-width: 90%;
+    }
+}
