@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+:root {
+    --amarelo-pastel: #F2EA7E;
+    --laranja-claro: #F27405;
+    --laranja-forte: #F25C05;
+    --branco: #F2F2F2;
+    --preto: #0D0D0D;
+}
+
+body {
+    background-color: var(--branco);
+}
+
+nav {
+    background-color: #0D0D0D;
+}
+.nav-link {
+    color: #f2f2f283;
+    transition: color 0.3s ease;
+}
+.nav-link:hover {
+    color: white;
+}
+.navbar-toggler {
+    background-color: var(--laranja-claro); 
+    border: none;
+}
+
+.navbar-brand img {
+    width: 10vw;
+}
+
+@media screen and (max-width: 880px) {
+    .navbar-brand img {
+        width: 30vw;
+    }
+}
+@media screen and (max-width: 600px) {
+    .navbar-brand img {
+        width: 40vw;
+    }
+}

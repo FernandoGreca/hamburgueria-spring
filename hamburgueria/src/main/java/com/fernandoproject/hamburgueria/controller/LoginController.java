@@ -23,7 +23,7 @@ public class LoginController {
     @Autowired
     private ServiceUsuario serviceUsuario;
     
-    @GetMapping("/")
+    @GetMapping("/login")
     public ModelAndView loginPage() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("login/login");
@@ -31,10 +31,10 @@ public class LoginController {
         return mv;
     }
 
-    @GetMapping("/index")
-    public ModelAndView indexPage() {
+    @GetMapping("/hamburgueria")
+    public ModelAndView hamburgueriaPage() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("pages/index");
+        mv.setViewName("pages/hamburgueria");
         return mv;
     }
     
@@ -56,7 +56,7 @@ public class LoginController {
                 mv.setViewName("login/login");
             } else {
                 session.setAttribute("usuarioLogado", userLogin);
-                return indexPage();
+                return hamburgueriaPage();
             }
 
             return mv;
