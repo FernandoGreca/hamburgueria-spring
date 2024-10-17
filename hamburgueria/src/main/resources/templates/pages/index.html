@@ -62,7 +62,11 @@
                             até para saciar a fome da madrugada, nosso cardápio é pensado para satisfazer os amantes de
                             hambúrgueres a qualquer momento. Venha nos conhecer e descubra um lugar onde o sabor não
                             dorme!</p>
-                        <a th:href= "@{/cardapio}" class="btn btn-custom">Faça seu Pedido!</a>
+                        <form action="PratosCardapio" method="post">
+                            <a th:href= "@{/cardapio}" class="btn btn-custom">
+                                <button type="submit" style="all: unset;">Faça seu Pedido!</button>
+                            </a>
+                        </form>
                     </div>
                 </div>
                 <div class="col-xl-6">

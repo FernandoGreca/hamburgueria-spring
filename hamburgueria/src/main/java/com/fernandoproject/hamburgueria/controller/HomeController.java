@@ -12,7 +12,9 @@ import com.fernandoproject.hamburgueria.model.Prato;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
 
 
 @Controller
@@ -31,8 +33,17 @@ public class HomeController {
 
     @GetMapping("/cardapio")
     public ModelAndView cardapio() {
+        return pratosCardapio();
+    }
+
+    @PostMapping("PratosCardapio")
+    public ModelAndView pratosCardapio() {
         ModelAndView mv = new ModelAndView();
+        List<Prato> pratos = pratoRepositorio.findAll();
+
+        mv.addObject("listaPratos", pratos);
         mv.setViewName("pages/cardapio");
+        
         return mv;
     }
 
@@ -58,5 +69,4 @@ public class HomeController {
         
         return mv;
     }
-    
 }
