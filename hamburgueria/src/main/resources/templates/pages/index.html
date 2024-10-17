@@ -42,6 +42,10 @@
                             <a class="nav-link" href="#sobre">Sobre</a>
                         </li>
                     </ul>
+
+                    <form th:if= "${session.usuarioLogado}" action="logout" method="post" class="d-flex ms-auto">
+                        <button type="submit" class="btn btn-danger">Sair</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -62,11 +66,7 @@
                             até para saciar a fome da madrugada, nosso cardápio é pensado para satisfazer os amantes de
                             hambúrgueres a qualquer momento. Venha nos conhecer e descubra um lugar onde o sabor não
                             dorme!</p>
-                        <form action="PratosCardapio" method="post">
-                            <a th:href= "@{/cardapio}" class="btn btn-custom">
-                                <button type="submit" style="all: unset;">Faça seu Pedido!</button>
-                            </a>
-                        </form>
+                        <a th:href= "@{/cardapio}" class="btn btn-custom">Faça seu Pedido!</a>
                     </div>
                 </div>
                 <div class="col-xl-6">
