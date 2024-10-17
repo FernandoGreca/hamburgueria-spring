@@ -12,7 +12,6 @@ import com.fernandoproject.hamburgueria.model.Prato;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
