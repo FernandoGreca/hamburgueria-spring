@@ -14,4 +14,11 @@ public class HomeController {
         mv.setViewName("pages/index");
         return mv;
     }
+
+    @GetMapping("/cardapio")
+    public ModelAndView cardapio() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("pages/cardapio");
+        return mv;
+    }
 }

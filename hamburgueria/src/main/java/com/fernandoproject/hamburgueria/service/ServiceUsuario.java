@@ -23,6 +23,9 @@ public class ServiceUsuario {
             if (usuarioRepositorio.findByEmail(usuario.getEmail()) != null) {
                 throw new EmailExistException("Email ja cadastrado. Tente novamente!");
             }
+            if (usuarioRepositorio.findByUser(usuario.getUser()) != null) {
+                throw new EmailExistException("Nome de usuário ja cadastrado. Tente novamente!");
+            }
 
             usuario.setSenha(Util.md5(usuario.getSenha()));
 

@@ -37,7 +37,7 @@ public class CadastroController {
         } else {
             try {
                 serviceUsuario.salvarUsuario(usuario);
-                mv.setViewName("redirect:/");
+                mv.setViewName("redirect:/login");
             } catch (EmailExistException e) {
                 mv.addObject("msgErroCadastro", e.getMessage());
                 mv.setViewName("login/cadastro");
