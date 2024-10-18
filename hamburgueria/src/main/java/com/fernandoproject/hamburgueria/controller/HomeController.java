@@ -28,7 +28,7 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    private static String caminhoImagens = "hamburgueria\\src\\main\\resources\\static\\img\\img-cardapio";
+    private static String caminhoImagens = "hamburgueria\\src\\main\\resources\\static\\img\\img-cardapio\\";
 
     @Autowired
     private PratoDao pratoRepositorio;
