@@ -53,7 +53,8 @@
     <main>
         <div class="container">
             <div class="row gap-3">
-                <div class="card col-lg-3" style="width: 18rem;" th:each= "prato : ${listaPratos}">
+                <div class="card col-lg-3" style="width: 18rem; padding: 0;" th:each= "prato : ${listaPratos}">            
+                    <img th:src="@{/cardapio/mostrarImagem/{imagem}(imagem=${prato.nomeImagem})}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${prato.nome}"></h5>
                         <p class="card-text" th:text="${prato.descricao}"></p>

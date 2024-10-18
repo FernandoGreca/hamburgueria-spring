@@ -30,7 +30,14 @@ public class Prato {
     @Positive(message = "O preço deve ser um valor positivo.")
     private Double preco;
 
+    private String nomeImagem;
 
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
+    }
     public long getId() {
         return id;
     }

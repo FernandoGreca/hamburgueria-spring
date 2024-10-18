@@ -58,7 +58,7 @@
                     <h5>Preencha as informações do prato para cadastro-lo.</h5>
                     <hr>
 
-                    <form action="AdicionarPrato" method="post" th:object="${prato}">
+                    <form action="AdicionarPrato" method="post" th:object="${prato}" enctype="multipart/form-data">
                         
                         <div class="form-group mb-3">
                             <div class="alert alert-danger" role="alert" th:if= "${#fields.hasErrors('nome')}">
@@ -83,6 +83,11 @@
                             </div>
                             <label><strong>Preço</strong></label>
                             <input class="form-control" type="number" step="0.01" placeholder="Ex: 9.99" data-th-field="*{preco}">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label><strong>Imagem do Prato:</strong></label>
+                            <input type="file" name="file">
                         </div>
                         
                         <div class="my-3">
