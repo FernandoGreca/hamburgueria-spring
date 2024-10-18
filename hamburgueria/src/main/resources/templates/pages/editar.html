@@ -58,8 +58,10 @@
                     <h5>Preencha as informações do prato para cadastro-lo.</h5>
                     <hr>
 
-                    <form action="AdicionarPrato" method="post" th:object="${prato}" enctype="multipart/form-data">
+                    <form action="/editar" method="post" th:object="${prato}" enctype="multipart/form-data">
                         
+                        <input type="hidden" data-th-field="*{id}">
+
                         <div class="form-group mb-3">
                             <div class="alert alert-danger" role="alert" th:if= "${#fields.hasErrors('nome')}">
                                 <span class="validation-message" th:errors="*{nome}"></span>
@@ -81,14 +83,8 @@
                             <div class="alert alert-danger" role="alert" th:if= "${#fields.hasErrors('preco')}">
                                 <span class="validation-message" th:errors="*{preco}"></span>
                             </div>
-                            <label><strong>Preço:</strong></label>
+                            <label><strong>Preço</strong></label>
                             <input class="form-control" type="number" step="0.01" placeholder="Ex: 9.99" data-th-field="*{preco}">
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <div class="alert alert-danger mt-4" role="alert" th:if= "${msgErroAdicionarPrato}">
-                                <span th:text="${msgErroAdicionarPrato}"></span>
-                            </div>
                         </div>
 
                         <div class="input-group mb-3">
@@ -97,7 +93,7 @@
                         </div>
                         
                         <div class="my-3">
-                            <button type="submit" class="btn btn-custom">Cadastrar Prato</button>
+                            <button type="submit" class="btn btn-custom">Editar Prato</button>
                         </div>
                     </form>
                 </div>

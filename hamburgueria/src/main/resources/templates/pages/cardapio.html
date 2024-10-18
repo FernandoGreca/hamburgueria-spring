@@ -60,6 +60,9 @@
                         <p class="card-text" th:text="${prato.descricao}"></p>
                         <p>R$ <span class="card-text" th:text="${prato.preco}"></span></p>
                     </div>
+                    <div class="card-footer" th:if= "${session.usuarioLogado}">
+                        <a th:href= "@{editar/{id}(id=${prato.id})}" class="btn btn-dark">Editar</a>
+                    </div>
                 </div>
             </div>
         </div>
