@@ -88,6 +88,12 @@ public class CardapioController {
         return mv;
     }
 
+    @GetMapping("/excluir/{id}")
+    public String excluirPrato(@PathVariable("id") long id) {
+        pratoRepositorio.deleteById(id);
+        return "redirect:/cardapio";
+    }
+
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") long id) {
         ModelAndView mv = new ModelAndView();

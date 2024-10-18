@@ -62,6 +62,7 @@
                     </div>
                     <div class="card-footer" th:if= "${session.usuarioLogado}">
                         <a th:href= "@{editar/{id}(id=${prato.id})}" class="btn btn-dark">Editar</a>
+                        <a th:href= "@{excluir/{id}(id=${prato.id})}" class="btn btn-outline-danger">Excluir</a>
                     </div>
                 </div>
             </div>
