@@ -27,7 +27,13 @@ public class LoginController {
     public ModelAndView loginPage() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("login/login");
-        mv.addObject("msg", "Projeto da página de login");
+        return mv;
+    }
+
+    @GetMapping("/login-cliente")
+    public ModelAndView loginClientePage() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("clientes/login-cliente");
         return mv;
     }
 
@@ -68,11 +74,45 @@ public class LoginController {
         return mv;
     }
 
+    @PostMapping("loginCliente")
+    public ModelAndView loginCliente(@Valid Usuario usuario, BindingResult br, HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+
+        try {
+            mv.addObject("usuario", new Usuario());
+            if (br.hasErrors()) {
+                mv.setViewName("clientes/login-cliente");
+            }
+
+            Usuario clienteLogado = serviceUsuario.loginUsuario(usuario.getUser(), Util.md5(usuario.getSenha()));
+
+            if (clienteLogado == null) {
+                mv.addObject("msgErroLoginCliente", "Usuário não encontrado. Tente novamente!");
+                mv.setViewName("clientes/login-cliente");
+            } else {
+                session.setAttribute("clienteLogado", clienteLogado);
+                mv.setViewName("pages/index");
+                return mv;
+            }
+
+            return mv;
+        } catch (NoSuchAlgorithmException | ServiceExc e) {
+            mv.addObject("msgErroLoginCliente", "Usuário não encontrado. Tente Novamente!");
+            mv.setViewName("clientes/login-cliente");
+        }
+        
+        return mv;
+    }
+
     @PostMapping("logout")
     public ModelAndView logout(HttpSession session) {
         session.invalidate();
         return loginPage();
     }
     
-    
+    @PostMapping("logoutCliente")
+    public ModelAndView logoutCliente(HttpSession session) {
+        session.invalidate();
+        return new ModelAndView("redirect:/");
+    }
 }

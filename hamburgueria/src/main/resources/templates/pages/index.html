@@ -43,6 +43,15 @@
                         </li>
                     </ul>
 
+                    <a th:unless="${session.clienteLogado}" th:href="@{/login-cliente}" class="ms-auto">
+                        <button class="btn btn-custom">Login | Cadastro</button>
+                    </a>
+                    
+
+                    <form th:if= "${session.clienteLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
+                        <button type="submit" class="btn btn-danger">Sair</button>
+                    </form>
+
                     <form th:if= "${session.usuarioLogado}" action="logout" method="post" class="d-flex ms-auto">
                         <button type="submit" class="btn btn-danger">Sair</button>
                     </form>

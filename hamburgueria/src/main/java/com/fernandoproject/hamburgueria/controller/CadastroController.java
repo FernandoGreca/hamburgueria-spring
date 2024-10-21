@@ -27,6 +27,37 @@ public class CadastroController {
         return mv;
     }
 
+    @GetMapping("/cadastro-cliente")
+    public ModelAndView cadastroClientePage() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("clientes/cadastro-cliente");
+        mv.addObject("usuario", new Usuario());
+        return mv;
+    }
+
+    @PostMapping("salvarUsuarioCliente")
+    public ModelAndView salvarUsuarioCliente(@Valid Usuario usuario, BindingResult br) {
+        ModelAndView mv = new ModelAndView();
+
+        if (br.hasErrors()) {
+            mv.addObject("msgErroCadastro", "Preencha todos os campos corretamente para completar o cadastro.");
+            mv.setViewName("clientes/cadastro-cliente");
+        } else {
+            try {
+                serviceUsuario.salvarUsuario(usuario);
+                mv.setViewName("redirect:/login-cliente");
+            } catch (EmailExistException e) {
+                mv.addObject("msgErroCadastro", e.getMessage());
+                mv.setViewName("clientes/cadastro-cliente");
+            } catch (Exception e) {
+                mv.addObject("msgErroCadastro", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+                mv.setViewName("clientes/cadastro-cliente");
+            }
+        }
+        
+        return mv;
+    }
+
     @PostMapping("salvarUsuario")
     public ModelAndView salvarUsuario(@Valid Usuario usuario, BindingResult br) {
         ModelAndView mv = new ModelAndView();
