@@ -48,7 +48,7 @@
                     </a>
                     
 
-                    <form th:if= "${session.clienteLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
+                    <form th:if= "${session.clienteLogado}" th:unless= "${session.usuarioLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
                         <button type="submit" class="btn btn-danger">Sair</button>
                     </form>
 

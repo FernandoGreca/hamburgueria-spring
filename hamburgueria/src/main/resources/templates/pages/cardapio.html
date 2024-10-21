@@ -19,6 +19,22 @@
         rel="stylesheet">
 
     <title>Hamburgueria | Cardapio</title>
+    <style>
+        .adicionar-carrinho {
+            background-color: #F27405;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .adicionar-carrinho:hover {
+            background-color: #FF9100;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,14 +51,22 @@
                 <div class="collapse navbar-collapse gap-5" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" th:href= "@{/}">Home</a>
+                            <a class="nav-link" th:href="@{/}">Home</a>
                         </li>
-                        <li th:if= "${session.usuarioLogado}" class="nav-item">
-                            <a class="nav-link" th:href= "@{/adicionar-prato}">Adicionar Prato</a>
+                        <li th:if="${session.usuarioLogado}" class="nav-item">
+                            <a class="nav-link" th:href="@{/adicionar-prato}">Adicionar Prato</a>
                         </li>
                     </ul>
 
-                    <form th:if= "${session.usuarioLogado}" action="logout" method="post" class="d-flex ms-auto">
+                    <a th:unless="${session.clienteLogado}" th:href="@{/login-cliente}" class="ms-auto">
+                        <button class="btn btn-custom">Login | Cadastro</button>
+                    </a>
+                    
+                    <form th:if="${session.clienteLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
+                        <button type="submit" class="btn btn-danger">Sair</button>
+                    </form>
+
+                    <form th:if="${session.usuarioLogado}" action="logout" method="post" class="d-flex ms-auto">
                         <button type="submit" class="btn btn-danger">Sair</button>
                     </form>
                 </div>
@@ -50,25 +74,36 @@
         </nav>
     </header>
 
-    <main>
+    <main class="mt-md-3">
         <div class="container">
-            <div class="row gap-3">
-                <div class="card col-lg-3" style="width: 18rem; padding: 0;" th:each= "prato : ${listaPratos}">            
+            <div class="row d-flex justify-content-center gap-3">
+                <div class="card col-lg-3" style="width: 18rem; padding: 0;" th:each="prato : ${listaPratos}">
                     <img th:src="@{/cardapio/mostrarImagem/{imagem}(imagem=${prato.nomeImagem})}" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${prato.nome}"></h5>
-                        <p class="card-text" th:text="${prato.descricao}"></p>
-                        <p>R$ <span class="card-text" th:text="${prato.preco}"></span></p>
+                    <div class="card-body row">
+                        <div class="col-xl-12">
+                            <h5 class="card-title" th:text="${prato.nome}"></h5>
+                            <p class="card-text" th:text="${prato.descricao}"></p>
+                            
+                        </div>
+                        <div class="col-xl-12 d-flex justify-content-between align-items-center mt-3">
+                            <p class="m-0">R$ <span class="card-text" th:text="${prato.preco}"></span></p>
+                            <form action="adicionarCarrinho" method="post" th:if= "${session.clienteLogado}">
+                                <button type="submit" class="adicionar-carrinho">
+                                    <i class="bi bi-cart-plus"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="card-footer" th:if= "${session.usuarioLogado}">
-                        <a th:href= "@{editar/{id}(id=${prato.id})}" class="btn btn-dark">Editar</a>
-                        <a th:href= "@{excluir/{id}(id=${prato.id})}" class="btn btn-outline-danger">Excluir</a>
+                    <div class="card-footer" th:if="${session.usuarioLogado}">
+                        <a th:href="@{editar/{id}(id=${prato.id})}" class="btn btn-dark">Editar</a>
+                        <a th:href="@{excluir/{id}(id=${prato.id})}" class="btn btn-outline-danger">Excluir</a>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    
+
+    <footer class="mt-5"></footer>
 
     <!-- JS BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
