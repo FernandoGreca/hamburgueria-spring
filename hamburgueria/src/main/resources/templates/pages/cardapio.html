@@ -53,7 +53,7 @@
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/}">Home</a>
                         </li>
-                        <li th:if="${session.usuarioLogado}" class="nav-item">
+                        <li th:if="${session.clienteLogado != null and session.clienteLogado.isAdm}" class="nav-item">
                             <a class="nav-link" th:href="@{/adicionar-prato}">Adicionar Prato</a>
                         </li>
                     </ul>
@@ -63,10 +63,6 @@
                     </a>
                     
                     <form th:if="${session.clienteLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
-                        <button type="submit" class="btn btn-danger">Sair</button>
-                    </form>
-
-                    <form th:if="${session.usuarioLogado}" action="logout" method="post" class="d-flex ms-auto">
                         <button type="submit" class="btn btn-danger">Sair</button>
                     </form>
                 </div>
@@ -94,7 +90,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="card-footer" th:if="${session.usuarioLogado}">
+                    <div class="card-footer" th:if="${session.clienteLogado != null and session.clienteLogado.isAdm}">
                         <a th:href="@{editar/{id}(id=${prato.id})}" class="btn btn-dark">Editar</a>
                         <a th:href="@{excluir/{id}(id=${prato.id})}" class="btn btn-outline-danger">Excluir</a>
                     </div>

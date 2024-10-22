@@ -42,7 +42,7 @@
                         </li>
                     </ul>
 
-                    <form th:if= "${session.usuarioLogado}" action="logout" method="post" class="d-flex ms-auto">
+                    <form th:if= "${session.clienteLogado.isAdm}" action="logout" method="post" class="d-flex ms-auto">
                         <button type="submit" class="btn btn-danger">Sair</button>
                     </form>
                 </div>

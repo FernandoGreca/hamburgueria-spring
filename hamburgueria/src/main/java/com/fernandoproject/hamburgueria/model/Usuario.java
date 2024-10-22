@@ -28,7 +28,16 @@ public class Usuario {
     @Size(min = 3, max = 32, message = "A sua senha deve conter entre 3 a 32 caracteres.")
     private String senha;
 
+    private boolean adm = false;
     
+    public boolean isAdm() {
+        return adm;
+    }
+
+    public void setAdm(boolean adm) {
+        this.adm = adm;
+    }
+
     public long getId() {
         return id;
     }

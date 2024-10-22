@@ -47,12 +47,7 @@
                         <button class="btn btn-custom">Login | Cadastro</button>
                     </a>
                     
-
-                    <form th:if= "${session.clienteLogado}" th:unless= "${session.usuarioLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
-                        <button type="submit" class="btn btn-danger">Sair</button>
-                    </form>
-
-                    <form th:if= "${session.usuarioLogado}" action="logout" method="post" class="d-flex ms-auto">
+                    <form th:if= "${session.clienteLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
                         <button type="submit" class="btn btn-danger">Sair</button>
                     </form>
                 </div>

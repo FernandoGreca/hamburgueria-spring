@@ -22,13 +22,6 @@ public class LoginController {
 
     @Autowired
     private ServiceUsuario serviceUsuario;
-    
-    @GetMapping("/login")
-    public ModelAndView loginPage() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("login/login");
-        return mv;
-    }
 
     @GetMapping("/login-cliente")
     public ModelAndView loginClientePage() {
@@ -44,35 +37,6 @@ public class LoginController {
         return mv;
     }
     
-    
-    @PostMapping("login")
-    public ModelAndView login(@Valid Usuario usuario, BindingResult br, HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-
-        try {
-            mv.addObject("usuario", new Usuario());
-            if (br.hasErrors()) {
-                mv.setViewName("login/login");
-            }
-
-            Usuario userLogin = serviceUsuario.loginUsuario(usuario.getUser(), Util.md5(usuario.getSenha()));
-
-            if (userLogin == null) {
-                mv.addObject("msgErroLogin", "Usuário não encontrado. Tente novamente!");
-                mv.setViewName("login/login");
-            } else {
-                session.setAttribute("usuarioLogado", userLogin);
-                return hamburgueriaPage();
-            }
-
-            return mv;
-        } catch (NoSuchAlgorithmException | ServiceExc e) {
-            mv.addObject("msgErroLogin", "Usuário não encontrado. Tente Novamente!");
-            mv.setViewName("login/login");
-        }
-        
-        return mv;
-    }
 
     @PostMapping("loginCliente")
     public ModelAndView loginCliente(@Valid Usuario usuario, BindingResult br, HttpSession session) {
@@ -102,12 +66,6 @@ public class LoginController {
         }
         
         return mv;
-    }
-
-    @PostMapping("logout")
-    public ModelAndView logout(HttpSession session) {
-        session.invalidate();
-        return loginPage();
     }
     
     @PostMapping("logoutCliente")
