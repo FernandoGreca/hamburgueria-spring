@@ -82,7 +82,7 @@
                             
                         </div>
                         <div class="col-xl-12 d-flex justify-content-between align-items-center mt-3">
-                            <p class="m-0">R$ <span class="card-text" th:text="${prato.preco}"></span></p>
+                            <p class="m-0">R$ <span class="card-text" th:text="${#numbers.formatDecimal(prato.preco, 0, 'POINT', 2, 'COMMA')}"></span></p>
                             <form action="AdicionarCarrinho" method="post" th:if= "${session.clienteLogado}">
                                 <button type="submit" class="adicionar-carrinho">
                                     <i class="bi bi-cart-plus"></i>
