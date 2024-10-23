@@ -36,12 +36,12 @@ public class CarrinhoController {
 
         for (ItensCompra it : itensCompra) {
             if (it.getPrato().getId() == id) {
-
                 if (acao == 1) {
                     it.setQuantidade(it.getQuantidade() + 1);
                 } else if (acao == 0 && it.getQuantidade() != 1) {
                     it.setQuantidade(it.getQuantidade() - 1);
                 }
+                it.setValorTotal(it.getQuantidade() * it.getValorUnitario());
                 break;
             }
         }
@@ -63,8 +63,6 @@ public class CarrinhoController {
 
     @GetMapping("/adicionarCarrinho/{id}")
     public ModelAndView adicionarCarrinho(@PathVariable long id) {
-        ModelAndView mv = new ModelAndView();
-
         Optional<Prato> pratoClicado = pratoRepositorio.findById(id);
         Prato prato = pratoClicado.get();
 
@@ -86,8 +84,6 @@ public class CarrinhoController {
             itensCompra.add(item);
         }
         
-        mv.addObject("listaItens", itensCompra);
-        mv.setViewName("redirect:/carrinho");
-        return mv;
+        return carrinhoPage();
     }
 }
