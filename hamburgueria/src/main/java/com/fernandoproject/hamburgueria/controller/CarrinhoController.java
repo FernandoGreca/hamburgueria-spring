@@ -49,6 +49,18 @@ public class CarrinhoController {
         return carrinhoPage();
     }
 
+    @GetMapping("/removerPrato/{id}")
+    public ModelAndView removerPratoCarrinho(@PathVariable long id) {
+        for (ItensCompra it : itensCompra) {
+            if (it.getPrato().getId() == id) {
+                itensCompra.remove(it);
+                break;
+            }
+        }
+
+        return carrinhoPage();
+    }
+
     @GetMapping("/adicionarCarrinho/{id}")
     public ModelAndView adicionarCarrinho(@PathVariable long id) {
         ModelAndView mv = new ModelAndView();

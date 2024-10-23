@@ -80,7 +80,7 @@
                                         <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.prato.id}, acao=${0})}" class="btn btn-danger"><i class="bi bi-dash"></i></a>
                                     </td>
                                     <td class="text-right">R$<span th:text="${#numbers.formatDecimal(item.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span></td>
-                                    <td class="text-right"><button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> </button> </td>
+                                    <td class="text-right"><a th:href="@{/removerPrato/{id}(id=${item.prato.id})}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> </a> </td>
                                 </tr>
                                 
                                 <tr>

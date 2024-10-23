@@ -27,7 +27,7 @@ public class ItensCompra {
 
     private Double valorTotal;
 
-
+    
     public Double getValorTotal() {
         return valorTotal;
     }
