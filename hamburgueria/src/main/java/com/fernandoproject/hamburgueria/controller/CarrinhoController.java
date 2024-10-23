@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fernandoproject.hamburgueria.dao.PratoDao;
+import com.fernandoproject.hamburgueria.model.Compra;
 import com.fernandoproject.hamburgueria.model.ItensCompra;
 import com.fernandoproject.hamburgueria.model.Prato;
 
@@ -19,13 +20,24 @@ import com.fernandoproject.hamburgueria.model.Prato;
 public class CarrinhoController {
 
     private List<ItensCompra> itensCompra = new ArrayList<>();
+    private Compra compra = new Compra();
 
     @Autowired
     private PratoDao pratoRepositorio;
 
+
+    private void calculaTotal() {
+        compra.setValorTotal(0.0);
+        for (ItensCompra it : itensCompra) {
+            compra.setValorTotal(compra.getValorTotal() + it.getValorTotal());
+        }
+    }
+
     @GetMapping("/carrinho")
     public ModelAndView carrinhoPage() {
         ModelAndView mv = new ModelAndView();
+        calculaTotal();
+        mv.addObject("compra", compra);
         mv.setViewName("pages/carrinho");
         mv.addObject("listaItens", itensCompra);
         return mv;
@@ -46,7 +58,7 @@ public class CarrinhoController {
             }
         }
 
-        return carrinhoPage();
+        return new ModelAndView("redirect:/carrinho");
     }
 
     @GetMapping("/removerPrato/{id}")
@@ -58,7 +70,7 @@ public class CarrinhoController {
             }
         }
 
-        return carrinhoPage();
+        return new ModelAndView("redirect:/carrinho");
     }
 
     @GetMapping("/adicionarCarrinho/{id}")
@@ -71,6 +83,7 @@ public class CarrinhoController {
             if (it.getPrato().getId() == prato.getId()) {
                 controle = 1;
                 it.setQuantidade(it.getQuantidade() + 1);
+                it.setValorTotal(it.getQuantidade() * it.getValorUnitario());
                 break;
             }
         }
@@ -80,10 +93,10 @@ public class CarrinhoController {
             item.setPrato(prato);
             item.setValorUnitario(prato.getPreco());
             item.setQuantidade(item.getQuantidade() + 1);
-            item.setValorTotal(item.getQuantidade() * item.getValorUnitario());
+            item.setValorTotal(item.getValorTotal() + item.getQuantidade() * item.getValorUnitario());
             itensCompra.add(item);
         }
         
-        return carrinhoPage();
+        return new ModelAndView("redirect:/carrinho");
     }
 }

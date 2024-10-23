@@ -54,6 +54,9 @@ public class Compra {
         this.formaPagamento = formaPagamento;
     }
     public Double getValorTotal() {
+        if (valorTotal == null) {
+            valorTotal = 0.0;
+        }
         return valorTotal;
     }
     public void setValorTotal(Double valorTotal) {

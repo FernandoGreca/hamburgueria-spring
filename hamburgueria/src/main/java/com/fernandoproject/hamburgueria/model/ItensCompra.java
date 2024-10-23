@@ -29,6 +29,9 @@ public class ItensCompra {
 
     
     public Double getValorTotal() {
+        if (valorTotal == null) {
+            valorTotal = 0.0;
+        }
         return valorTotal;
     }
     public void setValorTotal(Double valorTotal) {
