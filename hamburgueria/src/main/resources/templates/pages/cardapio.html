@@ -83,11 +83,9 @@
                         </div>
                         <div class="col-xl-12 d-flex justify-content-between align-items-center mt-3">
                             <p class="m-0">R$ <span class="card-text" th:text="${#numbers.formatDecimal(prato.preco, 0, 'POINT', 2, 'COMMA')}"></span></p>
-                            <form action="AdicionarCarrinho" method="post" th:if= "${session.clienteLogado}">
-                                <button type="submit" class="adicionar-carrinho">
-                                    <i class="bi bi-cart-plus"></i>
-                                </button>
-                            </form>
+                            <a th:href= "@{/adicionarCarrinho/{id}(id=${prato.id})}" type="submit" class="adicionar-carrinho" th:if= "${session.clienteLogado}">
+                                <i class="bi bi-cart-plus"></i>
+                            </a>
                         </div>
                     </div>
                     <div class="card-footer" th:if="${session.clienteLogado != null and session.clienteLogado.isAdm}">
