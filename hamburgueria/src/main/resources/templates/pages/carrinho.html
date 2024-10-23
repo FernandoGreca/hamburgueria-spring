@@ -63,23 +63,23 @@
                                 <tr>
                                     <th scope="col"> </th>
                                     <th scope="col">Produto</th>
-                                    <th> </th>
+                                    
                                     <th scope="col" class="text-center">Quantidade</th>
                                     <th scope="col" class="text-right">Preço</th>
                                     <th> </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                    <td>Product Name Dada</td>
-                                    <td>In stock</td>
-                                    <td class="d-flex justify-content-center gap-3">
+                                <tr th:each= "item : ${listaItens}">
+                                    <td><img th:src="@{/cardapio/mostrarImagem/{imagem}(imagem=${item.prato.nomeImagem})}" width="80px" > </td>
+                                    <td th:text="${item.prato.nome}"></td>
+                                    
+                                    <td class="d-flex justify-content-center gap-3 p-5">
                                         <button class="btn btn-success"><i class="bi bi-plus"></i></button>
-                                        <span class="d-flex align-items-center">10</span>
+                                        <span class="d-flex align-items-center" th:text="${item.quantidade}"></span>
                                         <button class="btn btn-danger"><i class="bi bi-dash"></i></button>
                                     </td>
-                                    <td class="text-right">124,90 €</td>
+                                    <td class="text-right">R$<span th:text="${#numbers.formatDecimal(item.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span></td>
                                     <td class="text-right"><button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> </button> </td>
                                 </tr>
                                 
@@ -89,7 +89,7 @@
                                     <td></td>
                                     <td></td>
                                     <td>Total</td>
-                                    <td class="text-right">255,90 €</td>
+                                    <td class="text-right"></td>
                                 </tr>
                             
                             </tbody>
@@ -99,7 +99,7 @@
                 <div class="col mb-2">
                     <div class="row">
                         <div class="col-xl-6">
-                            <button class="btn btn-block btn-light">Continue Comprando</button>
+                            <a th:href="@{/cardapio}" class="btn btn-block btn-light">Continue Comprando</a>
                         </div>
                         <div class="col-xl-6 text-right">
                             <button class="btn btn-lg btn-block btn-success text-uppercase">Finalizar Pedido</button>

@@ -25,8 +25,15 @@ public class ItensCompra {
 
     private Double valorUnitario;
 
+    private Double valorTotal;
 
 
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
     public long getId() {
         return id;
     }
@@ -46,6 +53,9 @@ public class ItensCompra {
         this.compra = compra;
     }
     public Integer getQuantidade() {
+        if (quantidade == null) {
+            quantidade = 0;
+        }
         return quantidade;
     }
     public void setQuantidade(Integer quantidade) {
