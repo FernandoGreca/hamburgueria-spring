@@ -75,9 +75,9 @@
                                     <td th:text="${item.prato.nome}"></td>
                                     
                                     <td class="d-flex justify-content-center gap-3 p-5">
-                                        <button class="btn btn-success"><i class="bi bi-plus"></i></button>
+                                        <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.prato.id}, acao=${1})}" class="btn btn-success"><i class="bi bi-plus"></i></a>
                                         <span class="d-flex align-items-center" th:text="${item.quantidade}"></span>
-                                        <button class="btn btn-danger"><i class="bi bi-dash"></i></button>
+                                        <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.prato.id}, acao=${0})}" class="btn btn-danger"><i class="bi bi-dash"></i></a>
                                     </td>
                                     <td class="text-right">R$<span th:text="${#numbers.formatDecimal(item.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span></td>
                                     <td class="text-right"><button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> </button> </td>

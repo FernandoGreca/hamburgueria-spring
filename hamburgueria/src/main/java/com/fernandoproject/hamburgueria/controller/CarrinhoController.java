@@ -14,6 +14,7 @@ import com.fernandoproject.hamburgueria.dao.PratoDao;
 import com.fernandoproject.hamburgueria.model.ItensCompra;
 import com.fernandoproject.hamburgueria.model.Prato;
 
+
 @Controller
 public class CarrinhoController {
 
@@ -28,6 +29,24 @@ public class CarrinhoController {
         mv.setViewName("pages/carrinho");
         mv.addObject("listaItens", itensCompra);
         return mv;
+    }
+
+    @GetMapping("/alterarQuantidade/{id}/{acao}")
+    public ModelAndView alterarQuantidade(@PathVariable long id, @PathVariable Integer acao) {
+
+        for (ItensCompra it : itensCompra) {
+            if (it.getPrato().getId() == id) {
+
+                if (acao == 1) {
+                    it.setQuantidade(it.getQuantidade() + 1);
+                } else if (acao == 0 && it.getQuantidade() != 1) {
+                    it.setQuantidade(it.getQuantidade() - 1);
+                }
+                break;
+            }
+        }
+
+        return carrinhoPage();
     }
 
     @GetMapping("/adicionarCarrinho/{id}")
