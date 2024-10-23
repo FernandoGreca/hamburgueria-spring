@@ -16,35 +16,51 @@ import com.fernandoproject.hamburgueria.model.ItensCompra;
 import com.fernandoproject.hamburgueria.model.Prato;
 
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class CarrinhoController {
-
-    private List<ItensCompra> itensCompra = new ArrayList<>();
-    private Compra compra = new Compra();
 
     @Autowired
     private PratoDao pratoRepositorio;
 
+    @Autowired
+    private HttpSession session;
 
-    private void calculaTotal() {
+    private void calculaTotal(List<ItensCompra> itensCompra, Compra compra) {
         compra.setValorTotal(0.0);
         for (ItensCompra it : itensCompra) {
             compra.setValorTotal(compra.getValorTotal() + it.getValorTotal());
         }
     }
 
+    @SuppressWarnings("unchecked")
     @GetMapping("/carrinho")
     public ModelAndView carrinhoPage() {
+        List<ItensCompra> itensCompra = (List<ItensCompra>) session.getAttribute("itensCompra");
+        if (itensCompra == null) {
+            itensCompra = new ArrayList<>();
+        }
+        Compra compra = (Compra) session.getAttribute("compra");
+        if (compra == null) {
+            compra = new Compra();
+        }
+
         ModelAndView mv = new ModelAndView();
-        calculaTotal();
+        calculaTotal(itensCompra, compra);
         mv.addObject("compra", compra);
         mv.setViewName("pages/carrinho");
         mv.addObject("listaItens", itensCompra);
         return mv;
     }
 
+    @SuppressWarnings("unchecked")
     @GetMapping("/alterarQuantidade/{id}/{acao}")
     public ModelAndView alterarQuantidade(@PathVariable long id, @PathVariable Integer acao) {
+        List<ItensCompra> itensCompra = (List<ItensCompra>) session.getAttribute("itensCompra");
+        if (itensCompra == null) {
+            itensCompra = new ArrayList<>();
+        }
 
         for (ItensCompra it : itensCompra) {
             if (it.getPrato().getId() == id) {
@@ -57,24 +73,40 @@ public class CarrinhoController {
                 break;
             }
         }
-
+        session.setAttribute("itensCompra", itensCompra);
         return new ModelAndView("redirect:/carrinho");
     }
 
+    @SuppressWarnings("unchecked")
     @GetMapping("/removerPrato/{id}")
     public ModelAndView removerPratoCarrinho(@PathVariable long id) {
+        List<ItensCompra> itensCompra = (List<ItensCompra>) session.getAttribute("itensCompra");
+        if (itensCompra == null) {
+            itensCompra = new ArrayList<>();
+        }
+
         for (ItensCompra it : itensCompra) {
             if (it.getPrato().getId() == id) {
                 itensCompra.remove(it);
                 break;
             }
         }
-
+        session.setAttribute("itensCompra", itensCompra);
         return new ModelAndView("redirect:/carrinho");
     }
 
+    @SuppressWarnings("unchecked")
     @GetMapping("/adicionarCarrinho/{id}")
     public ModelAndView adicionarCarrinho(@PathVariable long id) {
+        List<ItensCompra> itensCompra = (List<ItensCompra>) session.getAttribute("itensCompra");
+        if (itensCompra == null) {
+            itensCompra = new ArrayList<>();
+        }
+        Compra compra = (Compra) session.getAttribute("compra");
+        if (compra == null) {
+            compra = new Compra();
+        }
+
         Optional<Prato> pratoClicado = pratoRepositorio.findById(id);
         Prato prato = pratoClicado.get();
 
@@ -92,11 +124,15 @@ public class CarrinhoController {
             ItensCompra item = new ItensCompra();
             item.setPrato(prato);
             item.setValorUnitario(prato.getPreco());
-            item.setQuantidade(item.getQuantidade() + 1);
-            item.setValorTotal(item.getValorTotal() + item.getQuantidade() * item.getValorUnitario());
+            item.setQuantidade(1); // Iniciar quantidade com 1
+            item.setValorTotal(item.getQuantidade() * item.getValorUnitario());
             itensCompra.add(item);
         }
-        
+
+        session.setAttribute("itensCompra", itensCompra);
+        session.setAttribute("compra", compra);
+
         return new ModelAndView("redirect:/carrinho");
     }
 }
+
