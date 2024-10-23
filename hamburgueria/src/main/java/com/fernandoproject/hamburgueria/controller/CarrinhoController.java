@@ -1,8 +1,8 @@
 package com.fernandoproject.hamburgueria.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fernandoproject.hamburgueria.dao.CarrinhoDao;
 import com.fernandoproject.hamburgueria.dao.PratoDao;
@@ -12,49 +12,86 @@ import com.fernandoproject.hamburgueria.model.Usuario;
 
 import jakarta.servlet.http.HttpSession;
 
-import java.util.ArrayList;
-
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
-
-@RestController
-@RequestMapping("/carrinho")
+@Controller
 public class CarrinhoController {
-    
-    private CarrinhoDao carrinhoRepositorio;
-    private PratoDao pratoRepositorio;
 
+    private final CarrinhoDao carrinhoRepositorio;
+    private final PratoDao pratoRepositorio;
 
     public CarrinhoController(CarrinhoDao carrinhoRepositorio, PratoDao pratoRepositorio) {
         this.carrinhoRepositorio = carrinhoRepositorio;
         this.pratoRepositorio = pratoRepositorio;
     }
 
-    @PostMapping("/adicionar")
-    public String adicionarAoCarrinho(@RequestParam Long pratoId, HttpSession session) {
+    @GetMapping("/carrinho")
+    public ModelAndView exibirCarrinho(HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("clienteLogado");
 
         if (usuario == null) {
-            return "Nenhum usuário logado!";
+            return new ModelAndView("redirect:/login");
+        }
+
+        Carrinho carrinho = carrinhoRepositorio.findByUsuario(usuario);
+        if (carrinho == null) {
+            carrinho = new Carrinho();
+            carrinho.setUsuario(usuario);
+        }
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("pages/carrinho");
+        mv.addObject("pratos", carrinho.getPratos());
+        mv.addObject("total", calcularTotalCarrinho(carrinho));
+
+        return mv;
+    }
+
+    @PostMapping("AdicionarAoCarrinho")
+    public ModelAndView adicionarAoCarrinho(@RequestParam Long pratoId, HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        Usuario usuario = (Usuario) session.getAttribute("clienteLogado");
+
+        if (usuario == null) {
+            return new ModelAndView("redirect:/login");
         }
 
         Prato prato = pratoRepositorio.findById(pratoId).orElse(null);
         if (prato == null) {
-            return "Prato não encontrado!";
+            mv.addObject("msgPrato", "Prato não encontrado!");
+            mv.setViewName("redirect:/cardapio");
+            return mv;
         }
 
-        Carrinho carrinho = carrinhoRepositorio.findbyUsuario(usuario);
+        Carrinho carrinho = carrinhoRepositorio.findByUsuario(usuario);
         if (carrinho == null) {
             carrinho = new Carrinho();
             carrinho.setUsuario(usuario);
-            carrinho.setPratos(new ArrayList<>());
         }
 
-        carrinho.getPratos().add(prato);
+        // Verifique se o prato já está no carrinho para evitar duplicações
+        if (!carrinho.getPratos().contains(prato)) {
+            carrinho.getPratos().add(prato);
+        }
 
-        carrinhoRepositorio.save(carrinho);
-        
-        return "Prato adicionado ao carrinho!";
+        try {
+            carrinhoRepositorio.save(carrinho);
+        } catch (Exception e) {
+            // Log para depurar o erro
+            System.out.println("------------------------------------ EEERRROOOO ------------------" + e.getMessage());
+            e.printStackTrace();
+            mv.addObject("msgPrato", "Erro ao adicionar prato ao carrinho!");
+            mv.setViewName("redirect:/cardapio");
+            return mv;
+        }
+
+        mv.addObject("msgPrato", "Prato adicionado com sucesso");
+        mv.setViewName("redirect:/cardapio");
+        return mv;
     }
-    
+
+    private double calcularTotalCarrinho(Carrinho carrinho) {
+        return carrinho.getPratos().stream().mapToDouble(Prato::getPreco).sum();
+    }
 }

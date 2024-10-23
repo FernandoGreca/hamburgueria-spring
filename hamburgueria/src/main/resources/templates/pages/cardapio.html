@@ -56,6 +56,9 @@
                         <li th:if="${session.clienteLogado != null and session.clienteLogado.isAdm}" class="nav-item">
                             <a class="nav-link" th:href="@{/adicionar-prato}">Adicionar Prato</a>
                         </li>
+                        <li th:if="${session.clienteLogado}" class="nav-item">
+                            <a class="nav-link" th:href="@{/carrinho}"><i class="bi bi-cart-plus"></i> Carrinho</a>
+                        </li>
                     </ul>
 
                     <a th:unless="${session.clienteLogado}" th:href="@{/login-cliente}" class="ms-auto">
@@ -71,6 +74,9 @@
     </header>
 
     <main class="mt-md-3">
+        <div class="alert alert-danger" role="alet" th:if= "${msgPrato}">
+            <p th:text="${msgPrato}"></p>
+        </div>
         <div class="container">
             <div class="row d-flex justify-content-center gap-3">
                 <div class="card col-lg-3" style="width: 18rem; padding: 0;" th:each="prato : ${listaPratos}">
@@ -83,7 +89,8 @@
                         </div>
                         <div class="col-xl-12 d-flex justify-content-between align-items-center mt-3">
                             <p class="m-0">R$ <span class="card-text" th:text="${#numbers.formatDecimal(prato.preco, 0, 'POINT', 2, 'COMMA')}"></span></p>
-                            <form action="AdicionarCarrinho" method="post" th:if= "${session.clienteLogado}">
+                            <form action="AdicionarAoCarrinho" method="post" th:if= "${session.clienteLogado}">
+                                <input type="hidden" name="pratoId" th:value="${prato.id}">
                                 <button type="submit" class="adicionar-carrinho">
                                     <i class="bi bi-cart-plus"></i>
                                 </button>

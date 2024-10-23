@@ -6,5 +6,5 @@ import com.fernandoproject.hamburgueria.model.Carrinho;
 import com.fernandoproject.hamburgueria.model.Usuario;
 
 public interface CarrinhoDao extends JpaRepository<Carrinho, Long> {
-    Carrinho findbyUsuario(Usuario usuario);
+    Carrinho findByUsuario(Usuario usuario);
 }
