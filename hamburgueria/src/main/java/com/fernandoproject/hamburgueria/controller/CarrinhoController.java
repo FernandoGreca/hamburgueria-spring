@@ -18,6 +18,7 @@ import com.fernandoproject.hamburgueria.model.Prato;
 
 import jakarta.servlet.http.HttpSession;
 
+
 @Controller
 public class CarrinhoController {
 
@@ -34,9 +35,30 @@ public class CarrinhoController {
         }
     }
 
-    @SuppressWarnings("unchecked")
+    @GetMapping("/finalizar")
+    public ModelAndView finalizarCompraPage() {
+        @SuppressWarnings("unchecked")
+        List<ItensCompra> itensCompra = (List<ItensCompra>) session.getAttribute("itensCompra");
+        if (itensCompra == null) {
+            itensCompra = new ArrayList<>();
+        }
+        Compra compra = (Compra) session.getAttribute("compra");
+        if (compra == null) {
+            compra = new Compra();
+        }
+
+        ModelAndView mv = new ModelAndView();
+        calculaTotal(itensCompra, compra);
+        mv.addObject("compra", compra);
+        mv.setViewName("pages/finalizar-compra");
+        mv.addObject("listaItens", itensCompra);
+        return mv;
+    }
+    
+
     @GetMapping("/carrinho")
     public ModelAndView carrinhoPage() {
+        @SuppressWarnings("unchecked")
         List<ItensCompra> itensCompra = (List<ItensCompra>) session.getAttribute("itensCompra");
         if (itensCompra == null) {
             itensCompra = new ArrayList<>();
@@ -54,9 +76,9 @@ public class CarrinhoController {
         return mv;
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping("/alterarQuantidade/{id}/{acao}")
     public ModelAndView alterarQuantidade(@PathVariable long id, @PathVariable Integer acao) {
+        @SuppressWarnings("unchecked")
         List<ItensCompra> itensCompra = (List<ItensCompra>) session.getAttribute("itensCompra");
         if (itensCompra == null) {
             itensCompra = new ArrayList<>();
@@ -77,9 +99,9 @@ public class CarrinhoController {
         return new ModelAndView("redirect:/carrinho");
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping("/removerPrato/{id}")
     public ModelAndView removerPratoCarrinho(@PathVariable long id) {
+        @SuppressWarnings("unchecked")
         List<ItensCompra> itensCompra = (List<ItensCompra>) session.getAttribute("itensCompra");
         if (itensCompra == null) {
             itensCompra = new ArrayList<>();

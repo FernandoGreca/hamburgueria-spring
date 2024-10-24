@@ -18,7 +18,7 @@
         href="https://fonts.googleapis.com/css2?family=Righteous&family=Pacifico&family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;500;700&display=swap"
         rel="stylesheet">
 
-    <title>Hamburgueria | Carrinho</title>
+    <title>Hamburgueria | Finalizar Compra</title>
 </head>
 
 <body>
@@ -34,9 +34,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/}">Home</a>
-                        </li>
                         <li class="nav-item">
                             <a th:href="@{/cardapio}" class="nav-link">Cardapio</a>
                         </li>
@@ -58,7 +55,39 @@
 
     <main>
         <div class="container">
+
             <div class="row">
+                <div class="col-xl-12">
+                    <h1>Informações do Cliente</h1>
+                </div>
+                <div class="col-xl-6 my-3">
+                    <div class="formaDePagamento">
+                        <label for="formaPagamento"><strong>Forma de Pagamento:</strong></label>
+                        <select id="formaPagamento" class="form-control">
+                            <option value="">Selecione uma opção de pagamento</option>
+                            <option value="Dinheito">Dinheiro</option>
+                            <option value="Pix">Pix</option>
+                            <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <option value="Cartão de Débito">Cartão de Débito</option>
+                        </select>
+                        <figcaption class="figure-caption">OBS: O pagamento será realizado na retirada do pedido.</figcaption>
+                    </div>
+                </div>
+                <div class="col-xl-6 my-3">
+                    <div class="formaDeRetirada">
+                        <label for="formaRetirada"><strong>Forma de Retirada:</strong></label>
+                        <select class="form-control" id="formaRetirada" onchange="mostrarCampoLogradouro()">
+                            <option value="">Selecione uma opção para retirada</option>
+                            <option value="Entrega">Entrega</option>
+                            <option value="Comer no Local">Comer no Local</option>
+                            <option value="Do balcão para viagem">Do balcão pra viagem</option>
+                        </select>
+                    </div>
+                    <div id="campoLogradouro" style="display:none; margin-top:10px;">
+                        <label for="logradouro"><strong>Logradouro:</strong></label>
+                        <input type="text" id="logradouro" class="form-control" placeholder="Ex: Av. Rio de Janeiro 233">
+                    </div>
+                </div>
                 <div class="col-12">
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -66,36 +95,34 @@
                                 <tr>
                                     <th scope="col"> </th>
                                     <th scope="col">Produto</th>
-                                    
+
                                     <th scope="col" class="text-center">Quantidade</th>
-                                    <th scope="col">Valor Unitário</th>
                                     <th scope="col" class="text-right">Preço</th>
-                                    <th> </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each= "item : ${listaItens}">
-                                    <td><img th:src="@{/cardapio/mostrarImagem/{imagem}(imagem=${item.prato.nomeImagem})}" width="80px" > </td>
-                                    <td th:text="${item.prato.nome}"></td>
-                                    
+                                <tr th:each="item : ${listaItens}">
+                                    <td><img th:src="@{/cardapio/mostrarImagem/{imagem}(imagem=${item.prato.nomeImagem})}"
+                                            width="80px"> </td>
+                                    <td th:text="${item.prato.nome}" class="pt-5"></td>
+
                                     <td class="d-flex justify-content-center gap-3 p-5">
-                                        <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.prato.id}, acao=${1})}" class="btn btn-success"><i class="bi bi-plus"></i></a>
                                         <span class="d-flex align-items-center" th:text="${item.quantidade}"></span>
-                                        <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.prato.id}, acao=${0})}" class="btn btn-danger"><i class="bi bi-dash"></i></a>
                                     </td>
-                                    <td class="text-center">R$<span th:text="${#numbers.formatDecimal(item.valorUnitario, 0, 'POINT', 2, 'COMMA')}"></span></td>
-                                    <td class="text-center">R$<span th:text="${#numbers.formatDecimal(item.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span></td>
-                                    <td class="text-right"><a th:href="@{/removerPrato/{id}(id=${item.prato.id})}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> </a> </td>
+                                    <td class="text-right pt-5">R$<span
+                                            th:text="${#numbers.formatDecimal(item.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span>
+                                    </td>
                                 </tr>
-                                
+
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                    <td>Total: R$<span th:text="${#numbers.formatDecimal(compra.valorTotal, 1, 'POINT', 2, 'COMMA')}"></span></td>
+                                    <td>Total: R$<span
+                                            th:text="${#numbers.formatDecimal(compra.valorTotal, 1, 'POINT', 2, 'COMMA')}"></span>
+                                    </td>
                                 </tr>
-                            
+
                             </tbody>
                         </table>
                     </div>
@@ -103,10 +130,11 @@
                 <div class="col mb-2">
                     <div class="row">
                         <div class="col-xl-6">
-                            <a th:href="@{/cardapio}" class="btn btn-block btn-light">Continue Comprando</a>
+
                         </div>
                         <div class="col-xl-6 text-right">
-                            <a th:href= "@{/finalizar}" class="btn btn-lg btn-block btn-success text-uppercase">Finalizar Pedido</a>
+                            <a th:href="@{/finalizar}" class="btn btn-lg btn-block btn-success text-uppercase">Finalizar
+                                Pedido</a>
                         </div>
                     </div>
                 </div>
@@ -119,6 +147,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+        <script>
+            function mostrarCampoLogradouro() {
+                var formaRetirada = document.getElementById("formaRetirada").value;
+                var campoLogradouro = document.getElementById("campoLogradouro");
+            
+                // Verifica se a opção selecionada é "Entrega"
+                if (formaRetirada === "Entrega") {
+                    campoLogradouro.style.display = "block"; // Mostra o campo
+                } else {
+                    campoLogradouro.style.display = "none"; // Esconde o campo
+                }
+            }
+            </script>
 </body>
 
 </html>

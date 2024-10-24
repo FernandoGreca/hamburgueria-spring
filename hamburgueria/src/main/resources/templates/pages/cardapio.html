@@ -56,6 +56,9 @@
                         <li th:if="${session.clienteLogado != null and session.clienteLogado.isAdm}" class="nav-item">
                             <a class="nav-link" th:href="@{/adicionar-prato}">Adicionar Prato</a>
                         </li>
+                        <li th:if="${session.clienteLogado}" class="nav-item">
+                            <a class="nav-link" th:href="@{/carrinho}"><i class="bi bi-cart-plus"></i> Carrinho</a>
+                        </li>
                     </ul>
 
                     <a th:unless="${session.clienteLogado}" th:href="@{/login-cliente}" class="ms-auto">
