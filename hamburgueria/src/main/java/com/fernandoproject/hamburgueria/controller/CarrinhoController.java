@@ -75,11 +75,9 @@ public class CarrinhoController {
         for (ItensCompra it : itensCompra) {
             it.setCompra(compra);
             itensCompraRepositorio.saveAndFlush(it);
-            compra.setValorTotal(compra.getValorTotal() + it.getValorTotal());
         }
-        compraRepositorio.saveAndFlush(compra);
-        itensCompra = null;
-        compra = null;
+        session.setAttribute("compra", null);
+        session.setAttribute("itensCompra", null);
 
         return mv;
     }
