@@ -2,6 +2,7 @@ package com.fernandoproject.hamburgueria.model;
 
 import java.util.Date;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,9 +27,26 @@ public class Compra {
     private Date dataCompra = new Date();
 
     private String formaPagamento;
+    private String formaEntrega;
+
+    @Nullable
+    private String endereco;
+    
     private Double valorTotal;
 
 
+    public String getFormaEntrega() {
+        return formaEntrega;
+    }
+    public void setFormaEntrega(String formaEntrega) {
+        this.formaEntrega = formaEntrega;
+    }
+    public String getEndereco() {
+        return endereco;
+    }
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
     public long getId() {
         return id;
     }
