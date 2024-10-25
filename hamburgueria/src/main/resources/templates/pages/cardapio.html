@@ -56,6 +56,9 @@
                         <li th:if="${session.clienteLogado != null and session.clienteLogado.isAdm}" class="nav-item">
                             <a class="nav-link" th:href="@{/adicionar-prato}">Adicionar Prato</a>
                         </li>
+                        <li th:if="${session.clienteLogado != null and session.clienteLogado.isAdm}" class="nav-item">
+                            <a class="nav-link" th:href="@{/listar}">Pedidos Feitos</a>
+                        </li>
                         <li th:if="${session.clienteLogado}" class="nav-item">
                             <a class="nav-link" th:href="@{/carrinho}"><i class="bi bi-cart-plus"></i> Carrinho</a>
                         </li>
@@ -85,7 +88,7 @@
                             
                         </div>
                         <div class="col-xl-12 d-flex justify-content-between align-items-center mt-3">
-                            <p class="m-0">R$ <span class="card-text" th:text="${#numbers.formatDecimal(prato.preco, 0, 'POINT', 2, 'COMMA')}"></span></p>
+                            <p class="m-0">R$ <span class="card-text" th:text="${#numbers.formatDecimal(prato.preco, 1, 'POINT', 2, 'COMMA')}"></span></p>
                             <a th:href= "@{/adicionarCarrinho/{id}(id=${prato.id})}" class="adicionar-carrinho" th:if= "${session.clienteLogado}">
                                 <i class="bi bi-cart-plus"></i>
                             </a>

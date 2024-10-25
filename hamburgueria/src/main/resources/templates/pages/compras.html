@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Compras</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container" th:if="${session.clienteLogado != null and session.clienteLogado.isAdm}">
+    <h1 class="my-4">Lista de Compras</h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuário</th>
+                    <th>Data da Compra</th>
+                    <th>Forma de Pagamento</th>
+                    <th>Forma de Entrega</th>
+                    <th>Endereço</th>
+                    <th>Valor Total</th>
+                    <th>Itens</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="compra : ${compras}">
+                    <td th:text="${compra.id}"></td>
+                    <td th:text="${compra.usuario.user}"></td>
+                    <td th:text="${#dates.format(compra.dataCompra, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${compra.formaPagamento}"></td>
+                    <td th:text="${compra.formaEntrega}"></td>
+                    <td th:text="${compra.endereco}"></td>
+                    <td th:text="${#numbers.formatDecimal(compra.valorTotal, 1, 'POINT', 2, 'COMMA')}"></td>
+                    <td>
+                        <ul>
+                            <li th:each="item : ${compra.itensCompra}">
+                                Prato: <span th:text="${item.prato.nome}"></span> - 
+                                Quantidade: <span th:text="${item.quantidade}"></span> - 
+                                Valor Unitário: R$<span th:text="${#numbers.formatDecimal(item.valorUnitario, 1, 'POINT', 2, 'COMMA')}"></span> - 
+                                Valor Total: R$<span th:text="${#numbers.formatDecimal(item.valorTotal, 1, 'POINT', 2, 'COMMA')}"></span>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
