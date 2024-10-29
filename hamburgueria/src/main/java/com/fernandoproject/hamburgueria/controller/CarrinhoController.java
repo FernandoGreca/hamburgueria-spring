@@ -88,24 +88,32 @@ public class CarrinhoController {
         session.setAttribute("itensCompra", null);
 
         redirectAttributes.addFlashAttribute("sucessoCompra", "Compra efetuada com sucesso!");
-            mv.setViewName("redirect:/");
+        mv.setViewName("redirect:/");
 
         return mv;
     }
 
     @GetMapping("/finalizar")
-    public ModelAndView finalizarCompraPage() {
+    public ModelAndView finalizarCompraPage(RedirectAttributes redirectAttributes) {
+        ModelAndView mv = new ModelAndView();
         @SuppressWarnings("unchecked")
         List<ItensCompra> itensCompra = (List<ItensCompra>) session.getAttribute("itensCompra");
-        if (itensCompra == null) {
+        if (itensCompra == null ) {
             itensCompra = new ArrayList<>();
         }
+
+        if (itensCompra.isEmpty()) {
+            redirectAttributes.addFlashAttribute("erroFinalizar", "Para finalizar um pedido é necessário ter pelo menos um item ao carrinho!");
+            mv.setViewName("redirect:/carrinho");
+            return mv;
+        }
+
         Compra compra = (Compra) session.getAttribute("compra");
         if (compra == null) {
             compra = new Compra();
         }
 
-        ModelAndView mv = new ModelAndView();
+        
         buscarUsuarioLogado();
         mv.addObject("cliente", usuario);
         calculaTotal(itensCompra, compra);

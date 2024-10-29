@@ -58,6 +58,9 @@
     <main>
         <div class="container">
             <div class="row my-3 d-flex justify-content-center prato-carrinho">
+                <div class="alert alert-danger" role="alert" th:if="${erroFinalizar}">
+                    <strong class="text-center" th:text="${erroFinalizar}"></strong>
+                </div>  
                 <div class="col-md-5 gap-3 my-3" th:each="item : ${listaItens}">
                     <div class="row prato-adicionado">
                         <div class="col-xl-6 img-lanche">
