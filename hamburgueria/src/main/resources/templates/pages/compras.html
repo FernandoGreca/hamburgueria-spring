@@ -25,9 +25,11 @@
             thead {
                 display: none;
             }
+
             td {
                 display: block;
             }
+
             td::before {
                 content: attr(data-th) ": ";
             }
@@ -60,8 +62,8 @@
                     <a th:unless="${session.clienteLogado}" th:href="@{/login-cliente}" class="ms-auto">
                         <button class="btn btn-custom">Login | Cadastro</button>
                     </a>
-                    
-                    <form th:if= "${session.clienteLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
+
+                    <form th:if="${session.clienteLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
                         <button type="submit" class="btn btn-danger">Sair</button>
                     </form>
                 </div>
@@ -89,23 +91,60 @@
                 </thead>
                 <tbody>
                     <tr th:each="compra : ${compras}">
-                        <td data-th="ID"><strong th:text="${compra.id}"></strong></td>
-                        <td data-th="Usuário"><strong th:text="${compra.usuario.user}"></strong></td>
-                        <td data-th="Data da Comrpa"><strong th:text="${#dates.format(compra.dataCompra, 'dd/MM/yyyy HH:mm')}"></strong></td>
-                        <td data-th="Forma de Pagamento"><strong th:text="${compra.formaPagamento}"></strong></td>
-                        <td data-th="Forma de Entrega"><strong th:text="${compra.formaEntrega}"></strong></td>
-                        <td data-th="Endereço"><strong th:text="${compra.endereco}">-----</strong></td>
-                        <td data-th="Valor Total"><strong th:text="${#numbers.formatDecimal(compra.valorTotal, 1, 'POINT', 2, 'COMMA')}"></strong></td>
+                        <!-- Exibição do ID da compra -->
+                        <td data-th="ID">
+                            <strong th:text="${compra.id}"></strong>
+                        </td>
+
+                        <!-- Exibição do usuário que fez a compra -->
+                        <td data-th="Usuário">
+                            <strong
+                                th:text="${compra.usuario.user != null ? compra.usuario.user : 'Usuário não disponível'}"></strong>
+                        </td>
+
+                        <!-- Exibição da data da compra com formatação correta -->
+                        <td data-th="Data da Compra">
+                            <strong th:text="${#dates.format(compra.dataCompra, 'dd/MM/yyyy HH:mm')}"></strong>
+                        </td>
+
+                        <!-- Exibição da forma de pagamento -->
+                        <td data-th="Forma de Pagamento">
+                            <strong
+                                th:text="${compra.formaPagamento != null ? compra.formaPagamento : 'Forma de pagamento não informada'}"></strong>
+                        </td>
+
+                        <!-- Exibição da forma de entrega -->
+                        <td data-th="Forma de Entrega">
+                            <strong
+                                th:text="${compra.formaEntrega != null ? compra.formaEntrega : 'Forma de entrega não informada'}"></strong>
+                        </td>
+
+                        <!-- Exibição do endereço de entrega ou valor padrão -->
+                        <td data-th="Endereço">
+                            <strong th:text="${compra.endereco != null ? compra.endereco : '-----'}"></strong>
+                        </td>
+
+                        <!-- Exibição do valor total da compra com formatação monetária -->
+                        <td data-th="Valor Total">
+                            <strong
+                                th:text="${#numbers.formatDecimal(compra.valorTotal, 1, 'POINT', 2, 'COMMA')}"></strong>
+                        </td>
+
+                        <!-- Exibição dos itens da compra -->
                         <td data-th="Itens">
                             <ul>
+                                <!-- Iteração sobre os itens da compra -->
                                 <li th:each="item : ${compra.itensCompra}">
-                                    Prato: <span th:text="${item.prato.nome}"></span> -
-                                    Quantidade: <span th:text="${item.quantidade}"></span> -
-                                    Valor Unitário: R$<span
-                                        th:text="${#numbers.formatDecimal(item.valorUnitario, 1, 'POINT', 2, 'COMMA')}"></span>
-                                    -
-                                    Valor Total: R$<span
-                                        th:text="${#numbers.formatDecimal(item.valorTotal, 1, 'POINT', 2, 'COMMA')}"></span>
+                                    <p>Prato: <span
+                                            th:text="${item.prato.nome != null ? item.prato.nome : 'Nome do prato não disponível'}"></span>
+                                    </p>
+                                    <p>Quantidade: <span th:text="${item.quantidade}"></span></p>
+                                    <p>Valor Unitário: R$<span
+                                            th:text="${#numbers.formatDecimal(item.valorUnitario, 1, 'POINT', 2, 'COMMA')}"></span>
+                                    </p>
+                                    <p>Valor Total: R$<span
+                                            th:text="${#numbers.formatDecimal(item.valorTotal, 1, 'POINT', 2, 'COMMA')}"></span>
+                                    </p>
                                 </li>
                             </ul>
                         </td>
