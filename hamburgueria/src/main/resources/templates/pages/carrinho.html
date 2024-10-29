@@ -21,23 +21,65 @@
     <title>Hamburgueria | Carrinho</title>
 
     <style>
-        .img-lanche {
-            img {
-                width: 100%;
-                height: 100%;
-            }
+        .img-lanche img {
+            width: 100%;
+            height: 100%;
         }
 
         @media screen and (max-width: 768px) {
-            .img-lanche {
-                img {
-                    width: 60%;
-                }
+            body {
+                text-align: center;
+            }
+
+            .img-lanche img {
+                width: 63%;
+                margin: 0 auto;
             }
 
             .prato-carrinho {
                 display: flex;
                 justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .lixo {
+                margin-left: 15px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .preco-total {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .preco-total h2 {
+                margin-left: 0;
+            }
+
+            .preco-total div {
+                margin-top: 10px;
+            }
+
+            .preco-em-baixo {
+                margin-top: 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                border-top: 1px solid #BDBEBF;
+                border-bottom: 1px solid #BDBEBF;
+            }
+
+            .btn-block {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .quantidade {
+                margin: 0 8px;
             }
         }
     </style>
@@ -77,7 +119,7 @@
     </header>
 
     <main>
-        <div class="container ">
+        <div class="container">
             <div class="row my-5 d-flex justify-content-center prato-carrinho">
                 <div class="col-md-5 gap-3 mt-3" th:each="item : ${listaItens}">
                     <div class="row">
@@ -94,15 +136,15 @@
                                 <h6>Valor Total: R$<span
                                         th:text="${#numbers.formatDecimal(item.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span>
                                 </h6>
-                                <div class=" d-md-flex mt-3 gap-3 align-items-end">
+                                <div class="d-md-flex mt-3 gap-3 align-items-end">
                                     <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.prato.id}, acao=${1})}"
                                         class="btn btn-success"><i class="bi bi-plus"></i></a>
-                                    <span class="pb-2" th:text="${item.quantidade}"></span>
+                                    <span class="pb-2 quantidade" th:text="${item.quantidade}"></span>
                                     <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.prato.id}, acao=${0})}"
                                         class="btn btn-danger"><i class="bi bi-dash"></i></a>
 
                                     <a th:href="@{/removerPrato/{id}(id=${item.prato.id})}"
-                                        class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                                        class="btn btn-sm btn-danger lixo"><i class="bi bi-trash"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -111,14 +153,14 @@
 
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 preco-em-baixo justify-content-center">
                         <hr>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between preco-total ms-auto">
                             <h2>Total: R$<span
                                     th:text="${#numbers.formatDecimal(compra.valorTotal, 1, 'POINT', 2, 'COMMA')}"></span>
                             </h2>
                             <div>
-                                <a th:href="@{/cardapio}" class="btn btn-block btn-light mx-4">Continue Comprando</a>
+                                <a th:href="@{/cardapio}" class="btn btn-block btn-light">Continue Comprando</a>
                                 <a th:href="@{/finalizar}"
                                     class="btn btn-lg btn-block btn-success text-uppercase">Finalizar
                                     Pedido</a>
