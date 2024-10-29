@@ -8,6 +8,7 @@ import com.fernandoproject.hamburgueria.service.ServiceCompra;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -19,6 +20,7 @@ public class CompraController {
     @GetMapping("/listar")
     public ModelAndView exibirCompras() {
         List<Compra> compras = compraService.listarTodasAsCompras();
+        Collections.reverse(compras);
         ModelAndView mv = new ModelAndView(); // Nome da página HTML (compras.html)
         mv.setViewName("pages/compras");
         mv.addObject("compras", compras); // Adiciona a lista de compras ao modelo

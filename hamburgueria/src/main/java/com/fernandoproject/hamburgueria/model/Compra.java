@@ -16,6 +16,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "compra")
@@ -31,7 +32,10 @@ public class Compra {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCompra = new Date();
 
+    @NotEmpty
     private String formaPagamento;
+
+    @NotEmpty
     private String formaEntrega;
 
     @Nullable

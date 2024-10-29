@@ -55,7 +55,7 @@ public class LoginController {
                 mv.setViewName("clientes/login-cliente");
             } else {
                 session.setAttribute("clienteLogado", clienteLogado);
-                mv.setViewName("pages/index");
+                mv.setViewName("redirect:/cardapio");
                 return mv;
             }
 
