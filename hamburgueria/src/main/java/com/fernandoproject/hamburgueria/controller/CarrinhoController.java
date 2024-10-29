@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fernandoproject.hamburgueria.dao.CompraDao;
 import com.fernandoproject.hamburgueria.dao.ItensCompraDao;
@@ -57,9 +58,14 @@ public class CarrinhoController {
     }
 
     @PostMapping("/finalizar/confirmar")
-    public ModelAndView confirmarCompra(String formaDePagamento, String formaDeEntrega,@Nullable String endereco) {
+    public ModelAndView confirmarCompra(String formaDePagamento, String formaDeEntrega,@Nullable String endereco, RedirectAttributes redirectAttributes) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("pages/mensagem-finalizou");
+
+        if (formaDePagamento.isEmpty() || formaDeEntrega.isEmpty() || (formaDeEntrega.equals("Entrega") && endereco.isEmpty())) {
+            redirectAttributes.addFlashAttribute("erroCompra", "Para efetuar a compra, escolha uma opção de pagamento e de retirada!");
+            mv.setViewName("redirect:/finalizar");
+            return mv;
+        }
 
         Compra compra = (Compra) session.getAttribute("compra");
         compra.setUsuario(usuario);
@@ -80,6 +86,9 @@ public class CarrinhoController {
         compraRepositorio.saveAndFlush(compra);
         session.setAttribute("compra", null);
         session.setAttribute("itensCompra", null);
+
+        redirectAttributes.addFlashAttribute("sucessoCompra", "Compra efetuada com sucesso!");
+            mv.setViewName("redirect:/");
 
         return mv;
     }

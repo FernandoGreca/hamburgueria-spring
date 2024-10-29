@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.adicionar-carrinho {
+    background-color: #F27405;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.adicionar-carrinho:hover {
+    background-color: #FF9100;
+}

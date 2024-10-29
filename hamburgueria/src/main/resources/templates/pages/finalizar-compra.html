@@ -57,12 +57,17 @@
         <div class="container">
             <form action="/finalizar/confirmar" method="post">
                 <div class="row">
-                    <div class="col-xl-6 my-3">
+                    <div class="col-xl-12 my-2">
+                        <div class="alert alert-danger" role="alert" th:if="${erroCompra}">
+                            <strong class="text-center" th:text="${erroCompra}"></strong>
+                        </div>    
+                    </div>    
+                    <div class="col-xl-6">
                         <div class="formaDePagamento">
                             <label for="formaPagamento"><strong>Forma de Pagamento:</strong></label>
                             <select id="formaPagamento" class="form-control" name="formaDePagamento">
                                 <option value="">Selecione uma opção de pagamento</option>
-                                <option value="Dinheito">Dinheiro</option>
+                                <option value="Dinheiro">Dinheiro</option>
                                 <option value="Pix">Pix</option>
                                 <option value="Cartão de Crédito">Cartão de Crédito</option>
                                 <option value="Cartão de Débito">Cartão de Débito</option>
@@ -71,7 +76,7 @@
                             </figcaption>
                         </div>
                     </div>
-                    <div class="col-xl-6 my-3">
+                    <div class="col-xl-6">
                         <div class="formaDeRetirada">
                             <label for="formaRetirada"><strong>Forma de Retirada:</strong></label>
                             <select name="formaDeEntrega" class="form-control" id="formaRetirada"
@@ -88,7 +93,7 @@
                                 placeholder="Ex: Av. Rio de Janeiro 233">
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 mt-2">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
@@ -133,7 +138,7 @@
 
                             </div>
                             <div class="col-xl-6 text-right">
-                                <button class="btn btn-lg btn-block btn-success text-uppercase">Confirmar
+                                <button class="btn btn-lg btn-block btn-custom text-uppercase">Confirmar
                                     Compra</button>
                             </div>
                         </div>

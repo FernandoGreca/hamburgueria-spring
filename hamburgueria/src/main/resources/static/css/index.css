@@ -17,6 +17,13 @@ main {
     padding-top: 100px;
 }
 
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050; /* Para garantir que fique acima de outros elementos */
+}
+
 /* Estilos nav */
 nav {
     background-color: #0D0D0D;
