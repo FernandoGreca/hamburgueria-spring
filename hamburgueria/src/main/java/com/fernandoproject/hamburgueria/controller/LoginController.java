@@ -51,7 +51,7 @@ public class LoginController {
             Usuario clienteLogado = serviceUsuario.loginUsuario(usuario.getUser(), Util.md5(usuario.getSenha()));
 
             if (clienteLogado == null) {
-                mv.addObject("msgErroLoginCliente", "Usuário não encontrado. Tente novamente!");
+                mv.addObject("msgErroLoginCliente", "Usuário ou Senha errados. Tente Novamente! ");
                 mv.setViewName("clientes/login-cliente");
             } else {
                 session.setAttribute("clienteLogado", clienteLogado);
