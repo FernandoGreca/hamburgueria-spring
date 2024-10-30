@@ -1,49 +1,49 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"> <!-- Define o tipo de documento HTML e o idioma, além do namespace do Thymeleaf -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Define a escala e o tamanho da viewport para responsividade -->
     <!-- CSS BOOTSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> <!-- Importa o CSS do Bootstrap com segurança -->
     <!-- ICONS BOOTSTRAP -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> <!-- Importa os ícones do Bootstrap -->
     <!-- LINK CSS -->
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/index.css"> <!-- Link para um arquivo CSS personalizado -->
     <!-- LINK FAVICON -->
-    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon"> <!-- Define o favicon da página -->
     <!-- LINK FONTS -->
     <link
         href="https://fonts.googleapis.com/css2?family=Righteous&family=Pacifico&family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;500;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"> <!-- Importa fontes do Google Fonts -->
 
-    <title>Hamburgueria | Adicionar Prato</title>
+    <title>Hamburgueria | Adicionar Prato</title> <!-- Define o título da página -->
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" th:href="@{/}">
-                    <img src="/img/logo.png" alt="Logo da Hamburgueria">
+        <nav class="navbar navbar-expand-lg fixed-top"> <!-- Navbar do Bootstrap que fica fixa no topo -->
+            <div class="container-fluid"> <!-- Container fluido para a navbar -->
+                <a class="navbar-brand" th:href="@{/}"> <!-- Link para a home da hamburgueria -->
+                    <img src="/img/logo.png" alt="Logo da Hamburgueria"> <!-- Logo da hamburgueria -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <!-- Botão para alternar a visibilidade da navbar em telas pequenas -->
+                    <span class="navbar-toggler-icon"></span> <!-- Ícone do botão de alternância -->
                 </button>
-                <div class="collapse navbar-collapse gap-5" id="navbarNav">
-                    <ul class="navbar-nav">
+                <div class="collapse navbar-collapse gap-5" id="navbarNav"> <!-- Colapsa a navbar em telas pequenas -->
+                    <ul class="navbar-nav"> <!-- Lista de navegação -->
                         <li class="nav-item">
-                            <a class="nav-link" th:href= "@{/}">Home</a>
+                            <a class="nav-link" th:href= "@{/}">Home</a> <!-- Link para a página inicial -->
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href= "@{/cardapio}">Cardápio</a>
+                            <a class="nav-link" th:href= "@{/cardapio}">Cardápio</a> <!-- Link para a página do cardápio -->
                         </li>
                     </ul>
 
-                    <form th:if= "${session.clienteLogado.isAdm()}" action="logout" method="post" class="d-flex ms-auto">
-                        <button type="submit" class="btn btn-danger">Sair</button>
+                    <form th:if= "${session.clienteLogado.isAdm()}" action="logout" method="post" class="d-flex ms-auto"> <!-- Formulário de logout, visível apenas para administradores -->
+                        <button type="submit" class="btn btn-danger">Sair</button> <!-- Botão de logout -->
                     </form>
                 </div>
             </div>
@@ -51,49 +51,49 @@
     </header>
 
     <main>
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <h1>Adicionar Prato</h1>
-                    <h5>Preencha as informações do prato para cadastro-lo.</h5>
-                    <hr>
+        <div class="container"> <!-- Container principal da página -->
+            <div class="row"> <!-- Linha para organizar os elementos -->
+                <div class="col-xl-12"> <!-- Coluna que ocupa 12 espaços, ocupando toda a largura -->
+                    <h1>Adicionar Prato</h1> <!-- Título principal da seção -->
+                    <h5>Preencha as informações do prato para cadastro-lo.</h5> <!-- Instruções para o usuário -->
+                    <hr> <!-- Linha horizontal para separação -->
 
-                    <form action="/editar" method="post" th:object="${prato}" enctype="multipart/form-data">
+                    <form action="/editar" method="post" th:object="${prato}" enctype="multipart/form-data"> <!-- Formulário para edição do prato -->
                         
-                        <input type="hidden" data-th-field="*{id}">
+                        <input type="hidden" data-th-field="*{id}"> <!-- Campo oculto para armazenar o ID do prato -->
 
-                        <div class="form-group mb-3">
-                            <div class="alert alert-danger" role="alert" th:if= "${#fields.hasErrors('nome')}">
-                                <span class="validation-message" th:errors="*{nome}"></span>
+                        <div class="form-group mb-3"> <!-- Grupo de formulário para o nome do prato -->
+                            <div class="alert alert-danger" role="alert" th:if= "${#fields.hasErrors('nome')}"> <!-- Mensagem de erro se houver problemas com o campo 'nome' -->
+                                <span class="validation-message" th:errors="*{nome}"></span> <!-- Exibe a mensagem de erro -->
                             </div>
-                            <label><strong>Nome do Prato:</strong></label>
-                            <input class="form-control" type="text" placeholder="Ex: Smash Cheddar" data-th-field="*{nome}">
+                            <label><strong>Nome do Prato:</strong></label> <!-- Rótulo para o campo nome -->
+                            <input class="form-control" type="text" placeholder="Ex: Smash Cheddar" data-th-field="*{nome}"> <!-- Campo de entrada para o nome do prato -->
                         </div>
                     
                     
-                        <div class=" form-group mb-3">
-                            <div class="alert alert-danger" role="alert" th:if= "${#fields.hasErrors('descricao')}">
-                                <span class="validation-message" th:errors="*{descricao}"></span>
+                        <div class="form-group mb-3"> <!-- Grupo de formulário para a descrição do prato -->
+                            <div class="alert alert-danger" role="alert" th:if= "${#fields.hasErrors('descricao')}"> <!-- Mensagem de erro para o campo 'descricao' -->
+                                <span class="validation-message" th:errors="*{descricao}"></span> <!-- Exibe a mensagem de erro -->
                             </div>
-                            <label><strong>Descrição:</strong></label>
-                            <input class="form-control" type="text" placeholder="Ex: Este hamburger possui uma carne de 90g..." data-th-field="*{descricao}">
+                            <label><strong>Descrição:</strong></label> <!-- Rótulo para o campo descrição -->
+                            <input class="form-control" type="text" placeholder="Ex: Este hamburger possui uma carne de 90g..." data-th-field="*{descricao}"> <!-- Campo de entrada para a descrição do prato -->
                         </div>
                     
-                        <div class="form-group mb-3">
-                            <div class="alert alert-danger" role="alert" th:if= "${#fields.hasErrors('preco')}">
-                                <span class="validation-message" th:errors="*{preco}"></span>
+                        <div class="form-group mb-3"> <!-- Grupo de formulário para o preço do prato -->
+                            <div class="alert alert-danger" role="alert" th:if= "${#fields.hasErrors('preco')}"> <!-- Mensagem de erro para o campo 'preco' -->
+                                <span class="validation-message" th:errors="*{preco}"></span> <!-- Exibe a mensagem de erro -->
                             </div>
-                            <label><strong>Preço</strong></label>
-                            <input class="form-control" type="number" step="0.01" placeholder="Ex: 9.99" data-th-field="*{preco}">
+                            <label><strong>Preço</strong></label> <!-- Rótulo para o campo preço -->
+                            <input class="form-control" type="number" step="0.01" placeholder="Ex: 9.99" data-th-field="*{preco}"> <!-- Campo de entrada para o preço do prato -->
                         </div>
 
-                        <div class="input-group mb-3">
-                            <input type="file" name="file"class="form-control" id="inputGroupFile02">
-                            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                        <div class="input-group mb-3"> <!-- Grupo de entrada para upload de arquivo -->
+                            <input type="file" name="file" class="form-control" id="inputGroupFile02"> <!-- Campo de entrada para o upload de imagem do prato -->
+                            <label class="input-group-text" for="inputGroupFile02">Upload</label> <!-- Rótulo para o campo de upload -->
                         </div>
                         
-                        <div class="my-3">
-                            <button type="submit" class="btn btn-custom">Editar Prato</button>
+                        <div class="my-3"> <!-- Espaçamento para o botão -->
+                            <button type="submit" class="btn btn-custom">Editar Prato</button> <!-- Botão para enviar o formulário -->
                         </div>
                     </form>
                 </div>
@@ -105,7 +105,7 @@
     <!-- JS BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> <!-- Importa o JavaScript do Bootstrap -->
 </body>
 
 </html>

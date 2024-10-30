@@ -1,102 +1,124 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<!-- Define o documento como HTML5 e inclui o namespace do Thymeleaf para uso do template engine -->
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres para UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Responsividade em dispositivos móveis -->
+
     <!-- CSS BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Importa o CSS do Bootstrap 5 -->
+
     <!-- ICONS BOOTSTRAP -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Importa os ícones do Bootstrap -->
+
     <!-- LINK CSS -->
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/index.css"> <!-- Link para o arquivo CSS customizado do projeto -->
+
     <!-- LINK FAVICON -->
-    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon"> <!-- Favicon do site -->
+
     <!-- LINK FONTS -->
     <link
         href="https://fonts.googleapis.com/css2?family=Righteous&family=Pacifico&family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;500;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"> <!-- Importa fontes customizadas do Google Fonts -->
 
-    <title>Hamburgueria | Index</title>
+    <title>Hamburgueria | Index</title> <!-- Define o título da página -->
 </head>
 
 <body>
 
-    <header>     
+    <header>
         <nav class="navbar navbar-expand-lg fixed-top">
+            <!-- Navbar responsiva com Bootstrap, fixada no topo da página -->
             <div class="container-fluid">
                 <a class="navbar-brand" th:href="@{/}">
-                    <img src="/img/logo.png" alt="Logo da Hamburgueria">
+                    <!-- Define a marca da navbar com link dinâmico usando Thymeleaf -->
+                    <img src="/img/logo.png" alt="Logo da Hamburgueria"> <!-- Logo da hamburgueria -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <!-- Botão para expandir o menu em dispositivos móveis -->
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav"> <!-- Menu de navegação -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#topoSite">Início</a>
+                            <a class="nav-link" href="#topoSite">Início</a> <!-- Link âncora para a seção de início -->
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#sobre">Sobre</a>
+                            <a class="nav-link" href="#sobre">Sobre</a> <!-- Link âncora para a seção "Sobre" -->
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href= "@{/cardapio}">Cardápio</a>
+                            <a class="nav-link" th:href="@{/cardapio}">Cardápio</a>
+                            <!-- Link dinâmico para o cardápio -->
                         </li>
                     </ul>
 
+                    <!-- Verifica se o cliente está logado, se não estiver, mostra o botão de login/cadastro -->
                     <a th:unless="${session.clienteLogado}" th:href="@{/login-cliente}" class="ms-auto">
                         <button class="btn btn-custom">Login | Cadastro</button>
+                        <!-- Botão customizado de login/cadastro -->
                     </a>
-                    
-                    <form th:if= "${session.clienteLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
-                        <button type="submit" class="btn btn-danger">Sair</button>
+
+                    <!-- Se o cliente estiver logado, exibe o botão de logout -->
+                    <form th:if="${session.clienteLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
+                        <button type="submit" class="btn btn-danger">Sair</button> <!-- Botão de logout -->
                     </form>
                 </div>
             </div>
         </nav>
-        <div id="topoSite"></div>
+        <div id="topoSite"></div> <!-- Div vazia para referência do link âncora "Início" -->
     </header>
-    
+
 
     <main>
         <div class="col-xl-6">
-
+            <!-- Espaço reservado para conteúdo -->
         </div>
+
         <div class="col-xl-6">
+            <!-- Notificação de sucesso de compra, exibida dinamicamente caso exista a variável "sucessoCompra" -->
             <div class="notification alert alert-success" id="notification" role="alert" th:if="${sucessoCompra}">
                 <strong class="text-center" th:text="${sucessoCompra}"></strong>
-            </div>  
-        </div>   
+                <!-- Texto dinâmico da mensagem de sucesso -->
+            </div>
+        </div>
+
         <div class="container">
+            <!-- Seção principal com dois colunas: texto e imagem -->
             <div class="row py-xl-5 my-xl-5 py-3 my-3 topo-site d-flex">
                 <div class="col-xl-6 txt-col">
                     <div class="txt-topo">
-                        <h1>Burger - 24 Horas: Hambúrgueres Deliciosos a Qualquer Hora</h1>
+                        <h1>Burger - 24 Horas: Hambúrgueres Deliciosos a Qualquer Hora</h1> <!-- Título principal -->
                         <p>Bem-vindo ao Burger - 24 Horas! Nossa missão é simples: oferecer hambúrgueres saborosos,
                             frescos e preparados com ingredientes de alta qualidade a qualquer hora do dia ou da noite.
                             Aqui, você nunca precisa se preocupar com o horário para matar a fome — estamos prontos para
                             servir você 24 horas, todos os dias! Seja para aquele lanche rápido, um almoço suculento ou
                             até para saciar a fome da madrugada, nosso cardápio é pensado para satisfazer os amantes de
                             hambúrgueres a qualquer momento. Venha nos conhecer e descubra um lugar onde o sabor não
-                            dorme!</p>
-                        <a th:href= "@{/cardapio}" class="btn btn-custom">Faça seu Pedido!</a>
+                            dorme!</p> <!-- Descrição da proposta da hamburgueria -->
+                        <a th:href="@{/cardapio}" class="btn btn-custom">Faça seu Pedido!</a>
+                        <!-- Botão para acessar o cardápio -->
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <div class="hamburger-img d-flex align-items-center justify-content-center">
-                        <img src="/img/hamburguer-topo.webp" alt="">
+                        <img src="/img/hamburguer-topo.webp" alt=""> <!-- Imagem do hambúrguer no topo -->
                     </div>
-                </div>   
+                </div>
             </div>
-            <div id="sobre"></div>
+            <div id="sobre"></div> <!-- Div vazia para referência do link âncora "Sobre" -->
         </div>
-        <div class="bg-laranja">
-            
+
+        <div class="bg-laranja"> <!-- Seção de fundo laranja para o texto "Sobre" -->
             <div class="container">
                 <div class="txt-sobre">
-                    <h1>Sobre a Burger - 24 Horas</h1>
+                    <h1>Sobre a Burger - 24 Horas</h1> <!-- Título da seção "Sobre" -->
                     <p>
                         Na <strong>Burger - 24 Horas</strong>, acreditamos que um hambúrguer é muito mais do que apenas
                         uma refeição: é uma experiência que deve ser desfrutada a qualquer momento do dia. Fundada por
@@ -127,7 +149,7 @@
                         inovações e feedbacks para aprimorar nossos serviços e cardápio. Venha nos visitar e descubra o
                         verdadeiro sabor de um hambúrguer preparado com amor e dedicação. Estamos ansiosos para
                         servi-lo!
-                    </p>
+                    </p> <!-- Texto de marketing sobre os produtos e serviços da hamburgueria -->
                 </div>
             </div>
         </div>
@@ -135,30 +157,31 @@
 
     <footer class="py-3">
         <div class="container">
+            <!-- Rodapé com links de navegação e direitos autorais -->
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="#topoSite">Início</a>
+                    <a class="nav-link" href="#topoSite">Início</a> <!-- Link âncora para o topo da página -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#sobre">Sobre</a>
+                    <a class="nav-link" href="#sobre">Sobre</a> <!-- Link âncora para a seção "Sobre" -->
                 </li>
             </ul>
-            <p class="text-center nav-link">© 2024 Burger - 24 Horas, Inc</p>
+            <p class="text-center nav-link">© 2024 Burger - 24 Horas, Inc</p> <!-- Texto de direitos autorais -->
         </div>
     </footer>
 
     <script>
-        // Oculta a notificação após 5 segundos
+        // Oculta a notificação de sucesso após 8 segundos
         setTimeout(() => {
             const notification = document.getElementById('notification');
             notification.style.display = 'none';
-        }, 8000);
+        }, 8000); <!-- 8 segundos para ocultar a notificação de compra -->
     </script>
 
     <!-- JS BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> <!-- Importa o JavaScript do Bootstrap 5 -->
 </body>
 
 </html>

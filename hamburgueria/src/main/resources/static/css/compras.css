@@ -1,15 +1,15 @@
-@charset "UTF-8";
+@charset "UTF-8"; /* Define a codificação de caracteres do arquivo como UTF-8 */
 
-@media(max-width: 767px) {
-    thead {
-        display: none;
+@media(max-width: 767px) { /* Início de uma regra de mídia para dispositivos com largura máxima de 767 pixels (mobile) */
+    thead { 
+        display: none; /* Oculta o cabeçalho da tabela em visualizações móveis */
     }
 
-    td {
-        display: block;
+    td { 
+        display: block; /* Faz com que cada célula da tabela (td) seja exibida como um bloco em vez de inline */
     }
 
-    td::before {
-        content: attr(data-th) ": ";
+    td::before { 
+        content: attr(data-th) ": "; /* Insere o conteúdo do atributo data-th antes do valor da célula, seguido por dois pontos */
     }
 }

@@ -1,16 +1,18 @@
-@charset "UTF-8";
+@charset "UTF-8"; /* Define a codificação de caracteres como UTF-8, importante para suportar caracteres especiais */
 
+/* Estilo para o botão de adicionar ao carrinho */
 .adicionar-carrinho {
-    background-color: #F27405;
-    color: #FFFFFF;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: background-color 0.3s ease;
+    background-color: #F27405; /* Cor de fundo laranja do botão */
+    color: #FFFFFF; /* Cor do texto branco */
+    border: none; /* Remove a borda padrão do botão */
+    padding: 10px 20px; /* Espaçamento interno: 10px em cima e embaixo, 20px nas laterais */
+    font-size: 16px; /* Tamanho da fonte do texto no botão */
+    cursor: pointer; /* Muda o cursor para indicar que o botão é clicável */
+    border-radius: 50px; /* Cantos arredondados do botão para um visual mais suave */
+    transition: background-color 0.3s ease; /* Efeito de transição suave para a mudança de cor de fundo */
 }
 
+/* Estilo para o botão quando o mouse passa sobre ele */
 .adicionar-carrinho:hover {
-    background-color: #FF9100;
+    background-color: #FF9100; /* Cor de fundo laranja mais clara ao passar o mouse */
 }

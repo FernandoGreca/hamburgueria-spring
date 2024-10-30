@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<!-- Declaração do tipo de documento HTML e definição do namespace do Thymeleaf -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Definição do conjunto de caracteres e viewport para responsividade -->
+    
     <!-- CSS BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Inclusão do CSS do Bootstrap para estilização da página -->
+    
     <!-- ICONS BOOTSTRAP -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Inclusão do CSS dos ícones do Bootstrap -->
+    
     <!-- LINK CSS -->
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/compras.css">
+    <!-- Inclusão de folhas de estilo personalizadas -->
+    
     <!-- LINK FAVICON -->
     <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+    <!-- Definição do favicon para o site -->
+    
     <!-- LINK FONTS -->
     <link
         href="https://fonts.googleapis.com/css2?family=Righteous&family=Pacifico&family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;500;700&display=swap"
         rel="stylesheet">
+    <!-- Inclusão de fontes externas do Google Fonts -->
 
     <title>Hamburgueria | Pedidos Realizados</title>
+    <!-- Título da página -->
 </head>
 
 <body>
@@ -29,39 +42,50 @@
             <div class="container-fluid">
                 <a class="navbar-brand" th:href="@{/}">
                     <img src="/img/logo.png" alt="Logo da Hamburgueria">
+                    <!-- Logo da hamburgueria, link que leva à página inicial -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
+                    <!-- Botão para colapsar o menu em telas menores -->
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="#topoSite">Início</a>
+                            <!-- Link para a seção "Início" -->
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#sobre">Sobre</a>
+                            <!-- Link para a seção "Sobre" -->
                         </li>
                     </ul>
 
                     <a th:unless="${session.clienteLogado}" th:href="@{/login-cliente}" class="ms-auto">
                         <button class="btn btn-custom">Login | Cadastro</button>
+                        <!-- Botão de login/cadastro exibido se o cliente não estiver logado -->
                     </a>
 
                     <form th:if="${session.clienteLogado}" action="logoutCliente" method="post" class="d-flex ms-auto">
                         <button type="submit" class="btn btn-danger">Sair</button>
+                        <!-- Formulário para logout exibido se o cliente estiver logado -->
                     </form>
                 </div>
             </div>
         </nav>
         <div id="topoSite"></div>
+        <!-- Div para ancorar o link de início -->
     </header>
 
     <div class="container" th:if="${session.clienteLogado != null and session.clienteLogado.isAdm}">
+        <!-- Exibe a lista de compras apenas se o cliente estiver logado e for administrador -->
+        
         <h1 class="my-4">Lista de Compras</h1>
+        <!-- Título da seção -->
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
+                <!-- Tabela para exibir a lista de compras -->
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -76,6 +100,8 @@
                 </thead>
                 <tbody>
                     <tr th:each="compra : ${compras}">
+                        <!-- Iteração sobre a lista de compras -->
+                        
                         <!-- Exibição do ID da compra -->
                         <td data-th="ID">
                             <strong th:text="${compra.id}"></strong>

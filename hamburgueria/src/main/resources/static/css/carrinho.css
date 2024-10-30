@@ -1,77 +1,77 @@
-@charset "UTF-8";
+@charset "UTF-8"; /* Define a codificação de caracteres para UTF-8 */
 
-.img-lanche img {
-    width: 100%;
-    height: 100%;
+.img-lanche img { /* Seleciona as imagens dentro do container com a classe .img-lanche */
+    width: 100%; /* Define a largura das imagens como 100% do container pai */
+    height: 100%; /* Define a altura das imagens como 100% do container pai */
 }
 
-@media screen and (max-width: 768px) {
-    body {
-        text-align: center;
+@media screen and (max-width: 768px) { /* Início de um bloco de media query para dispositivos com largura máxima de 768px */
+    body { /* Seleciona o elemento body */
+        text-align: center; /* Alinha o texto ao centro */
     }
 
-    .prato-adicionado {
-        box-shadow: 1px 10px 15px rgba(0, 0, 0, 0.3);
-        border: 1px solid #ccc;
-        border-radius: 8px;
+    .prato-adicionado { /* Seleciona elementos com a classe .prato-adicionado */
+        box-shadow: 1px 10px 15px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra ao redor do elemento */
+        border: 1px solid #ccc; /* Define uma borda cinza clara */
+        border-radius: 8px; /* Arredonda os cantos da borda */
     }
 
-    .img-lanche img {
-        width: 63%;
-        margin: 0 auto;
-        margin-top: 10px;
+    .img-lanche img { /* Seleciona novamente as imagens dentro do container com a classe .img-lanche */
+        width: 63%; /* Define a largura das imagens como 63% do container pai */
+        margin: 0 auto; /* Centraliza a imagem horizontalmente */
+        margin-top: 10px; /* Adiciona uma margem superior de 10px */
     }
 
-    .texto-prato {
-        margin-top: 13px;
+    .texto-prato { /* Seleciona elementos com a classe .texto-prato */
+        margin-top: 13px; /* Adiciona uma margem superior de 13px */
     }
 
-    .prato-carrinho {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
+    .prato-carrinho { /* Seleciona elementos com a classe .prato-carrinho */
+        display: flex; /* Define o layout como flexbox */
+        justify-content: center; /* Centraliza os itens horizontalmente */
+        flex-direction: column; /* Organiza os itens em uma coluna */
+        align-items: center; /* Centraliza os itens verticalmente */
 
-        width: 350px;
-        margin: 0 auto;
+        width: 350px; /* Define a largura do container como 350px */
+        margin: 0 auto; /* Centraliza o container na página */
     }
 
-    .lixo {
-        margin-left: 15px;
-        margin-top: 10px;
-        margin-bottom: 10px;
+    .lixo { /* Seleciona elementos com a classe .lixo */
+        margin-left: 15px; /* Adiciona uma margem esquerda de 15px */
+        margin-top: 10px; /* Adiciona uma margem superior de 10px */
+        margin-bottom: 10px; /* Adiciona uma margem inferior de 10px */
     }
 
-    .preco-total {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+    .preco-total { /* Seleciona elementos com a classe .preco-total */
+        flex-direction: column; /* Organiza os itens em uma coluna */
+        align-items: center; /* Centraliza os itens verticalmente */
+        text-align: center; /* Alinha o texto ao centro */
     }
 
-    .preco-total h2 {
-        margin-left: 0;
+    .preco-total h2 { /* Seleciona elementos h2 dentro de .preco-total */
+        margin-left: 0; /* Remove a margem esquerda */
     }
 
-    .preco-total div {
-        margin-top: 10px;
+    .preco-total div { /* Seleciona elementos div dentro de .preco-total */
+        margin-top: 10px; /* Adiciona uma margem superior de 10px */
     }
 
-    .preco-em-baixo {
-        margin-top: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .preco-em-baixo { /* Seleciona elementos com a classe .preco-em-baixo */
+        margin-top: 30px; /* Adiciona uma margem superior de 30px */
+        display: flex; /* Define o layout como flexbox */
+        flex-direction: column; /* Organiza os itens em uma coluna */
+        align-items: center; /* Centraliza os itens verticalmente */
 
-        border-top: 1px solid #BDBEBF;
-        border-bottom: 1px solid #BDBEBF;
+        border-top: 1px solid #BDBEBF; /* Adiciona uma borda superior cinza */
+        border-bottom: 1px solid #BDBEBF; /* Adiciona uma borda inferior cinza */
     }
 
-    .btn-block {
-        width: 100%;
-        margin-top: 10px;
+    .btn-block { /* Seleciona elementos com a classe .btn-block */
+        width: 100%; /* Define a largura como 100% do container pai */
+        margin-top: 10px; /* Adiciona uma margem superior de 10px */
     }
 
-    .quantidade {
-        margin: 0 8px;
+    .quantidade { /* Seleciona elementos com a classe .quantidade */
+        margin: 0 8px; /* Adiciona margens laterais de 8px */
     }
 }
